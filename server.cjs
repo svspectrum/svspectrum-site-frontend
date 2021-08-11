@@ -1,0 +1,1 @@
+const app = import('./build/index.mjs');
