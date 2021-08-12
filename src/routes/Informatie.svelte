@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	// EVENT PAGE
+	// INFO PAGE
 	import { getInfo } from "$lib/api/info";
 
     /**
@@ -29,7 +29,6 @@
     import type { IInfoData } from "$lib/api/info";
     
     export let info: IInfoData;
-    info.catagory[0].subcatagory
 </script>
 
 <main>
@@ -53,8 +52,13 @@
 </main>
 
 <style lang="scss">
+    .category {
+        margin: 2rem;
+    }
+
     .subcategories{
-        columns: 20rem 4;
+        columns: 25rem 4;
+        gap: 2rem;
     }
 
     .subcategory {
@@ -68,6 +72,8 @@
 
         box-shadow: 1px 2px 6px 0 rgba(0, 0, 0, 0.4);
         z-index: 1;
+        width: calc(100% - 2rem);
+        box-sizing: border-box;
 
         &::before, &::after {
             content: "";

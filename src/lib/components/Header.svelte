@@ -72,7 +72,7 @@
         min-height: var(--header-height);
 
         color: white;
-        background-color: #005f7f8a;
+        background-color: var(--primary-color-transparent);
         backdrop-filter: contrast(100%) blur(10px);
 
         z-index: 10;
@@ -116,6 +116,7 @@
                 background: rgba(0, 0, 0, 0.11)
             }
 
+            
             &.action {
                 background-color: white;
                 color: black;

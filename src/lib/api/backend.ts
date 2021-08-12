@@ -1,5 +1,5 @@
-// const backendURL = "https://www.svspectrum.nl/backend";
-const backendURL = "http://localhost:1337";
+const backendURL = "https://www.svspectrum.nl/backend";
+// const backendURL = "http://localhost:1337";
 
 export function getBackendURL(path: string) {
     if (path.charAt(0) == '/') {

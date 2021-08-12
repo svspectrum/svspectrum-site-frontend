@@ -1,6 +1,9 @@
 {
-  "name": "~TODO~",
+  "name": "spectrum-frontend",
   "version": "0.0.1",
+  "author": {
+    "name": "Steven Vroom"
+  },
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
@@ -22,6 +25,7 @@
     "node-sass": "^6.0.1",
     "prettier": "~2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
+    "sass": "^1.37.5",
     "svelte": "^3.42.1",
     "svelte-check": "^2.2.4",
     "svelte-preprocess": "^4.7.4",
@@ -30,9 +34,12 @@
   },
   "type": "module",
   "dependencies": {
+    "@fullcalendar/core": "^5.9.0",
+    "@fullcalendar/daygrid": "^5.9.0",
+    "@fullcalendar/icalendar": "^5.9.0",
+    "@fullcalendar/list": "^5.9.0",
+    "@fullcalendar/timegrid": "^5.9.0",
     "dayjs": "^1.10.6",
-    "esm": "^3.2.25",
-    "sass": "^1.37.5",
-    "showdown": "^1.9.1"
+    "showdown": "^1.9.1",
   }
 }

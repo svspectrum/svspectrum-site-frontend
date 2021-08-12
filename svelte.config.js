@@ -12,27 +12,14 @@ const config = {
 		target: '#svelte',
 
 		adapter: adapter({
-			// default options are shown
-			// out: 'build',
-			// precompress: false,
-			// env: {
-			// 	host: 'HOST',
-			// 	port: 'PORT'
-			// },
+			out: 'build',
 			esbuild(defaultOptions) {
 				return {
 					...defaultOptions,
-					// target: 'node14',
-					// format: 'cjs',
+					outfile: 'build/index.mjs',
 				};
 			}
 		}),
-
-		// vite: {
-		// 	optimizeDeps: {
-		// 		exclude: ['showdown']
-		// 	},
-		// }
 	}
 };
 

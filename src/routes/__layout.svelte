@@ -15,6 +15,8 @@
 
 <Footer />
 
+<img class="under-construction" src="/underconstruction.png" alt="site word aan gewerkt">
+
 <style lang="scss">
     :global {
         * {
@@ -23,13 +25,17 @@
         }
 
         html {
+            --primary-color: #005f7f;
+            --primary-color-transparent: #005f7f8a;
+            --secondary-color: #4ab3d6;
+            --secondary-color-transparent: #4ab3d630;
             font-size: 1.1rem;
             font-family: ff-uberhand-pro-2,sans-serif;
             font-weight: 200;
             font-style: normal;
             line-height: 1.5;
-            background-color: #005f7f;
-            scrollbar-color:  #005f7f8a #d0e2e7;
+            background-color: var(--primary-color);
+            scrollbar-color:  var(----primary-color-transparent) #d0e2e7;
             overflow-x: hidden;
         }
 
@@ -101,5 +107,26 @@
                 background: url("/torn-paper-bottom.png");
             }
         }
+    }
+
+    .under-construction {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 50vw;
+        z-index: 50;
+        pointer-events: none;
+
+        animation-name: move-up;
+        animation-duration: 3s;
+        animation-timing-function: ease-in;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes move-up {
+        from {transform: translate(0, 0);}
+        to {transform: translate(0, -100%);}
     }
 </style>
