@@ -85,6 +85,7 @@
         main {
             background-image: url("/paper.png");
             position: relative;
+            grid-row: span 2;
 
             &::before, &::after {
                 content: "";

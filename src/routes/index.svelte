@@ -30,7 +30,7 @@
 
     import HeaderImageHolder from "$lib/components/HeaderImageHolder.svelte";
     import NewsTree from "$lib/components/NewsTree.svelte";
-import Welcome from "$lib/components/Welcome.svelte";
+	import Welcome from "$lib/components/Welcome.svelte";
     
     export let news: INewsData[];
 </script>
