@@ -46,8 +46,7 @@
                     <a href="vacatures">vacatures</a>
                 </div>
             </div>
-            <a href="/register" class="action">Word Lid</a>
-            <a href="/login" class="action">Log In</a>
+            <a href="/Word-Lid" class="action">Word Lid</a>
         </nav>
         <svg>
             {#each marks as mark}
