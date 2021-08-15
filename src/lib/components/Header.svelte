@@ -33,7 +33,7 @@
     <div class="wrapper">
         <a href="/" class="logo"><img src="/logo.svg" alt="Spectrum"/></a>
         <nav>
-            <a href="/Nieuws">Nieuws</a>
+            <a href="/">Nieuws</a>
             <a href="/Agenda">Agenda</a>
             <a href="/Informatie">Informatie</a>
             <div class="dropdown">
@@ -57,11 +57,13 @@
 </header>
 
 <style lang="scss">
-    header {
-        --line-height: 1em;
-        --header-height: calc(3rem + var(--line-height));
+    :root {
+        --header-line-height: 1em;
+        --header-height: calc(3rem + var(--header-line-height));
+    }
 
-        position: sticky;
+    header {
+        position: fixed;
         top: 0;
         width: 100%;
 
@@ -76,7 +78,7 @@
 
         z-index: 10;
 
-        line-height: var(--line-height);
+        line-height: var(--header-line-height);
 
         .wrapper {
             flex-grow: 1;

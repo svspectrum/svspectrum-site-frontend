@@ -74,12 +74,16 @@
         #svelte {
             display: grid;
             min-height: 100vh;
-            grid-template-rows: auto 1fr auto;
+            grid-template-rows: 1fr auto;
         }
 
         .outer-main {
             display: grid;
             grid-template-rows: auto 1fr;
+
+            &>:first-child {
+                padding-top: var(--header-height);
+            }
         }
 
         main {

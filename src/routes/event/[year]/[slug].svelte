@@ -38,9 +38,7 @@
 
 <HeaderImageHolder>
 	<Image image={event.image}/>
-	<div class="shade"></div>
-	<div class="color"></div>
-	<h1>{event.title}</h1>
+	<h1 slot="top">{event.title}</h1>
 </HeaderImageHolder>
 
 <main>
@@ -52,7 +50,7 @@
 				<tr>
 					<td>{part.title}</td>
 					<td>{part.location}</td>
-					<td>{part.begin.format("D MMM YYYY H:mm")} tot {part.end.format("D MMM YYYY H:mm")}</td>
+					<td>van {part.begin.format("D MMM YYYY H:mm")}<br/>tot {part.end.format("D MMM YYYY H:mm")}</td>
 				</tr>
 			{/each}
 		</table>
@@ -93,25 +91,6 @@
 
 	table {
 		width: 100%;
-	}
-	
-	.shade {
-		position: absolute;
-		bottom: 0;
-		height: calc((5% + 3rem)*2);
-		width: 100%;
-
-		background: radial-gradient(ellipse farthest-side at bottom, rgba(0,0,0,0.5) 0%, rgba(0, 0, 0, 0) 100%);
-	}
-
-	.color {
-		position: absolute;
-		bottom: 0;
-		height: calc((5% + 3rem)*2);
-		width: 100%;
-
-		background: linear-gradient(0deg, rgba(0,95,127,1) 20%, rgba(0,95,127,0) 100%);
-		mix-blend-mode: color;
 	}
 
 	h1 {
