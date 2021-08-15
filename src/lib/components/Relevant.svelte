@@ -55,7 +55,6 @@
     }));
 
     let currentIndex = 0;
-    $: console.log(currentIndex, slides, movedSlides);
 
     let movedSlides : {slide: SlideData, position: number, index: number}[];
     $: movedSlides = getMovedSlides(slides, currentIndex);
