@@ -39,11 +39,11 @@
             <div class="dropdown">
                 <button>Bibliotheek</button>
                 <div>
-                    <a href="tentamens">tentamens</a>
-                    <a href="shop">(boeken) winkel</a>
-                    <a href="fotos">foto's</a>
-                    <a href="archief">archief</a>
-                    <a href="vacatures">vacatures</a>
+                    <a href="Tentamens">Tentamens</a>
+                    <a href="Boekenverkoop">(Boeken) Winkel</a>
+                    <a href="Fotos">Foto's</a>
+                    <a href="Archief">Archief</a>
+                    <a href="Vacatures">Vacatures</a>
                 </div>
             </div>
             <a href="/Word-Lid" class="action">Word Lid</a>
