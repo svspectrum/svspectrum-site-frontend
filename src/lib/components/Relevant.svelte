@@ -2,8 +2,8 @@
     import type { IRelevantData } from "$lib/api/relevant";
     import HeaderImageHolder from "./HeaderImageHolder.svelte";
     import dayjs from "dayjs";
-    import relativeTime from "dayjs/plugin/relativeTime";
-    import "dayjs/locale/nl";
+    import relativeTime from "dayjs/plugin/relativeTime.js";
+    import "dayjs/locale/nl.js";
     import type { IImageData } from "$lib/api/image";
     import Image from "./Image.svelte";
     import { cubicOut } from 'svelte/easing';
@@ -139,6 +139,10 @@
 <style lang="scss">
     .image-carousel {
         height: 100%;
+    }
+
+    .title-carousel {
+        user-select: none;
     }
 
     .title-carousel * {
