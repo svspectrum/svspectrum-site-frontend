@@ -1,11 +1,13 @@
 <script lang="ts">
+import { extension } from "$lib/api/markdownExtension";
+
     import showdown from "showdown"; 
     let { Converter } = showdown;
     
     export let title : string = null;
     export let markdown : string = null;
 
-    let converter = new Converter({headerLevelStart: 2, strikethrough: true});
+    let converter = new Converter({headerLevelStart: 2, strikethrough: true, extensions: [extension]});
     
     let html : string;
     $: html = markdown ? converter.makeHtml(markdown) : null;
@@ -38,6 +40,14 @@
             width: 2.3px;
             background: #005f7f;
             border-radius: 50%/50px;
+        }
+
+        :global(.right) {
+            float: right;
+        }
+
+        :global(.left) {
+            float: left;
         }
     }
 </style>
