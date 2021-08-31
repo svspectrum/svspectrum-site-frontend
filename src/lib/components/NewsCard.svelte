@@ -70,11 +70,11 @@ import { onMount } from "svelte";
     article {
         position: relative;
 
-        &:nth-last-of-type(even) .publish-date{
+        &:nth-of-type(odd) .publish-date{
             left: 100%;
         }
 
-        &:nth-last-of-type(odd) .publish-date{
+        &:nth-of-type(even) .publish-date{
             right: 100%;
         }
     }
