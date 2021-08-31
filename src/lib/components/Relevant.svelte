@@ -7,6 +7,7 @@
     import type { IImageData } from "$lib/api/image";
     import Image from "./Image.svelte";
     import { cubicOut } from 'svelte/easing';
+    import { getBackendURL } from "$lib/api/backend";
 
     type SlideData = {title: string, subtitle: string, reason: string, image: IImageData, slug: string};    
     
@@ -28,6 +29,10 @@
     }
 
     function getMovedSlides(slides: SlideData[], currentIndex: number) {
+        if (!slides.length) {
+            return [];
+        }
+
         let movedSlides = [];
         
         for (let position = -6; position <= 6; position++) {
@@ -111,8 +116,8 @@
         }
     }
 </script>
-
-<HeaderImageHolder>
+{#if movedSlides.length}
+<HeaderImageHolder> 
     <div class="image-carousel">
         {#each movedSlides as {index, position, slide} (index)}
             {#if position == 0}
@@ -135,6 +140,11 @@
         {/each}
     </div>
 </HeaderImageHolder>
+{:else}
+<HeaderImageHolder> 
+    <img src={getBackendURL("uploads/placeholder_d972f74598.jpg")}>
+</HeaderImageHolder>
+{/if}
 
 <style lang="scss">
     .image-carousel {
