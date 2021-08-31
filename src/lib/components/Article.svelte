@@ -49,5 +49,10 @@ import { extension } from "$lib/api/markdownExtension";
         :global(.left) {
             float: left;
         }
+
+        :global(img) {
+            border: .5em solid white;
+            margin: .5em;
+        }
     }
 </style>
