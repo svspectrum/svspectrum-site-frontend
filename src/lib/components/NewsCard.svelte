@@ -42,6 +42,7 @@
         position: relative;
 
         box-shadow: 1px 2px 6px 0 rgba(0, 0, 0, 0.4);
+        border-radius: 2px;
         z-index: 1;
 
         &::before, &::after {
@@ -90,13 +91,34 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                border-radius: 2px;
             }
 
             article {
                 height: 100%;
                 overflow: hidden;
-                color: #005f7f50;
-                // color: black;
+                color: var(--primary-color-transparent);
+                line-height: .6;
+                padding: 0;
+                mix-blend-mode: multiply;
+
+                &::before {
+                    content: none;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: -1px;
+                    box-sizing: border-box;
+
+                    border: 20px solid transparent;
+                    border-image: url(fade-border.png) 20 round;
+                }
+
+                * {
+                    // transform: scale(1.05);
+                }
             }
 
 
