@@ -113,7 +113,7 @@
                     box-sizing: border-box;
 
                     border: 20px solid transparent;
-                    border-image: url(fade-border.png) 20 round;
+                    border-image: url("/fade-border.png") 20 round;
                 }
             }
 
