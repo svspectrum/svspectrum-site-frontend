@@ -8,6 +8,7 @@
     import Image from "./Image.svelte";
     import { cubicOut } from 'svelte/easing';
     import { getBackendURL } from "$lib/api/backend";
+    import { onMount } from "svelte";
 
     type SlideData = {title: string, subtitle: string, reason: string, image: IImageData, slug: string};    
     
@@ -84,18 +85,16 @@
         direction = currentIndex < index ? 1 : -1;
         currentIndex = index;
 
-        resetTimer();
+        resetTimer(6000);
     }
 
     let timer = null;
-    function resetTimer() {
+    function resetTimer(delay = 3500) {
         if (timer) {
             clearTimeout(timer)
         }
-        timer = setTimeout(nextSlide, 3500);
+        timer = setTimeout(nextSlide, delay);
     }
-
-    resetTimer();
 
     function moveIn(node: HTMLElement, {delay = 0, duration = 1700, easing = null, direction = 1}) {
         return {
@@ -115,6 +114,18 @@
             css: t => `z-index: ${z-1-Math.floor((1-t)*100)}`
         }
     }
+
+    onMount(() => {
+        resetTimer();
+
+        window.addEventListener('blur', (e) => {
+            clearTimeout(timer);
+        });
+
+        window.addEventListener('focus', (e) => {
+            resetTimer();
+        });
+    });
 </script>
 {#if movedSlides.length}
 <HeaderImageHolder> 
