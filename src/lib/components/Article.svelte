@@ -31,14 +31,14 @@ import { extension } from "$lib/api/markdownExtension";
         width: 100%;
         box-sizing: border-box;
 
-        &::after {
+        &::before {
             content: "";
             position: absolute;
             top: 1rem;
             bottom: 1rem;
             left: .5rem;
             width: 2.3px;
-            background: #005f7f;
+            background: var(--primary-color);
             border-radius: 50%/50px;
         }
 

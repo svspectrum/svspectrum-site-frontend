@@ -45,8 +45,8 @@
         }
 
         html {
-            --primary-color: #005f7f;
-            --primary-color-transparent: #005f7f8a;
+            --primary-color: #0080a2;
+            --primary-color-transparent: #0080a28a;
             --secondary-color: #4ab3d6;
             --secondary-color-transparent: #4ab3d630;
             font-size: 1.1rem;
@@ -87,7 +87,7 @@
         }
 
         a {
-            color: #005f7f;
+            color: var(--primary-color);
             text-decoration: inherit;
 
             &:hover {
