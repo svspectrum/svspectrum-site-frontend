@@ -26,9 +26,9 @@ import { extension } from "$lib/api/markdownExtension";
 <style lang="scss">
     article {
         position: relative;
-        max-width: 120ch;
-        width: 100%;
+        max-width: calc(75ch + 2rem);
         padding: 1rem;
+        width: 100%;
         box-sizing: border-box;
 
         &::after {

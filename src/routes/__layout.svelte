@@ -53,7 +53,7 @@
             font-family: ff-uberhand-pro-2,sans-serif;
             font-weight: 200;
             font-style: normal;
-            line-height: 1.5;
+            line-height: 1.65;
             background-color: var(--primary-color);
             scrollbar-color:  var(----primary-color-transparent) #d0e2e7;
             overflow-x: hidden;
@@ -73,6 +73,10 @@
             &:not(:first-child) {
                 margin-top: 1rem;
             }
+        }
+
+        em, strong {
+            font-weight: 700;
         }
 
         li {
