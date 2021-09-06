@@ -31,6 +31,10 @@
     export let info: IInfoData;
 </script>
 
+<svelte:head>
+    <title>Informatie</title>
+</svelte:head>
+
 <main>
     {#each info.catagory as catagory}
         <div class="category" id={`c-${catagory.title}`}>

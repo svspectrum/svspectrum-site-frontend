@@ -33,6 +33,10 @@
     export let post: IPostData;
 </script>
 
+<svelte:head>
+    <title>{post.title}</title>
+</svelte:head>
+
 <main>
 	<Article markdown={post.content} title={post.title}/>
 </main>

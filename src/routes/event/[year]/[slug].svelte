@@ -36,6 +36,10 @@
     export let event: IEventData;
 </script>
 
+<svelte:head>
+    <title>{event.title}</title>
+</svelte:head>
+
 <HeaderImageHolder>
 	<Image image={event.image}/>
 	<h1 slot="top">{event.title}</h1>

@@ -60,8 +60,7 @@
 </script>
 
 <svelte:head>
-    <!-- <link href='fullcalendar/main.min.css' rel='stylesheet' /> -->
-    <!-- <script src='fullcalendar/main.min.js'></script> -->
+    <title>Spectrum Agenda</title>
 </svelte:head>
 
 <main>

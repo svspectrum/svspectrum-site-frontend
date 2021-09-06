@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { INewsData } from "$lib/api/news";
-import { onMount } from "svelte";
+    import { onMount } from "svelte";
     import Article from "./Article.svelte";
     import Image from "./Image.svelte";
 

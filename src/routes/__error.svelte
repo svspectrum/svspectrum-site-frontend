@@ -12,6 +12,10 @@
 	}
 </script>
 
+<svelte:head>
+    <title>Oops, iets is fout gegaan &#128560;</title>
+</svelte:head>
+
 <script lang="ts">
     import Article from "$lib/components/Article.svelte";
 

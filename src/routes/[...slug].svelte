@@ -32,6 +32,10 @@
     export let article: any;
 </script>
 
+<svelte:head>
+    <title>{article.title}</title>
+</svelte:head>
+
 <main>
 	<Article markdown={article.content} title={article.title}/>
 </main>

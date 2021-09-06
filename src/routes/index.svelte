@@ -39,6 +39,10 @@
 	export let relevant: IRelevantData[];
 </script>
 
+<svelte:head>
+    <title>Studievereniging Spectrum</title>
+</svelte:head>
+
 <Relevant relevant={relevant}/>
 
 <main>
