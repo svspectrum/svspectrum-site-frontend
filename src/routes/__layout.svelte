@@ -54,6 +54,7 @@
             font-weight: 200;
             font-style: normal;
             line-height: 1.65;
+            letter-spacing: 0.005em;
             background-color: var(--primary-color);
             scrollbar-color:  var(----primary-color-transparent) #d0e2e7;
             overflow-x: hidden;
