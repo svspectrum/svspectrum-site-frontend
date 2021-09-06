@@ -64,6 +64,7 @@
             font-family: lint-mccree,sans-serif;
             font-weight: 400;
             font-style: normal;
+            line-height: 1.2em;
 
             &:not(:first-child) {
                 margin-top: 2rem;

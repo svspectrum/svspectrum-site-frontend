@@ -47,7 +47,7 @@
 
 <main>
 	<Article markdown={event.description} title="Beschrijving" class="desc"/>
-	<Article markdown={event.info} title="Practische Informatie" class="info"/>
+	<Article markdown={event.info} title="Praktische Informatie" class="info"/>
 	<Article title="Onderdelen" class="parts">
 		<table>
 			{#each event.parts as part}

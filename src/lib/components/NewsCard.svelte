@@ -115,10 +115,6 @@
                     border: 20px solid transparent;
                     border-image: url(fade-border.png) 20 round;
                 }
-
-                * {
-                    // transform: scale(1.05);
-                }
             }
 
 

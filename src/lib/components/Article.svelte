@@ -39,7 +39,7 @@ import { extension } from "$lib/api/markdownExtension";
             left: .5rem;
             width: 2.3px;
             background: var(--primary-color);
-            border-radius: 50%/50px;
+            border-radius: 50%/50%;
         }
 
         :global(.right) {
