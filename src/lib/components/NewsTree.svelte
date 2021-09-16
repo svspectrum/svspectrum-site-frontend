@@ -6,9 +6,15 @@
 </script>
 
 <div class="news-tree">
-    <div class="timeline"></div>
+    <div class="timeline">
+        <h1>Nieuws</h1>
+    </div>
     <div class="top"></div>
-    <div class="media"></div>
+    <div class="media">
+        <div class="publish-date">
+            <i>Gepost<br/>op</i>
+        </div>
+    </div>
     {#each news as item (item.slug)}
         <NewsCard item={item}/>
     {/each}
@@ -42,6 +48,7 @@
         .media {
             grid-column: 3;
             grid-row: span 2;
+            position: relative;
         }
 
         .timeline {
@@ -49,10 +56,21 @@
             grid-column: 2 / span 1;
             justify-self: center;
 
+            top: calc(2rem + 12px);
             height: 100%;
-            // width: var(--timeline-width);
             width: var(--timeline-line-width);
             background-color: black;
+
+            h1 {
+                font-size: 2rem;
+                position: absolute;
+                bottom: 100%;
+                left: -50%;
+                transform: translate(-50%, 0);
+
+                border-bottom: black solid 4px;
+                padding: 0 .3ch;
+            }
         }
 
         :global(.news-card) {
@@ -68,5 +86,32 @@
         }
     }
 
+    .publish-date {
+        position: absolute;
+        top: 50%;
+        transform: translate(0%, -50%);
 
+        width: var(--publish-time-width);
+        text-align: center;
+        line-height: 1;
+        right: 100%;
+
+        &::before {
+            content: "";
+
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+            width: 1rem;
+            height: var(--timeline-line-width);
+            background-color: black;
+
+            border-radius: 6px/50%;
+        }
+
+        &::before {
+            left: calc(0% - var(--timeline-line-width)/2);
+        }
+    }
 </style>

@@ -22,7 +22,6 @@
             {/if}
         </div>
         <div class="bottom">
-
             <h1>{item.title}</h1>
         </div>
     </a>

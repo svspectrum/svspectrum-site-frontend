@@ -85,11 +85,11 @@
         direction = currentIndex < index ? 1 : -1;
         currentIndex = index;
 
-        resetTimer(6000);
+        resetTimer(7000);
     }
 
     let timer = null;
-    function resetTimer(delay = 3500) {
+    function resetTimer(delay = 5000) {
         if (timer) {
             clearTimeout(timer)
         }
@@ -144,9 +144,11 @@
             <a class="slide-info" class:current={position == 0} 
                 style={`transform: translate(${position*100}%, 0)`}
                 on:click={() => setSlide(index)}>
-                <div>{slide.title}</div>
-                <div>{slide.subtitle}</div>
-                <div>{slide.reason}</div>
+                <div class="title">{slide.title}</div>
+                {#if slide.title.toLowerCase().search(slide.subtitle.toLowerCase()) == -1}
+                <div class="subtitle">{slide.subtitle}</div>
+                {/if}
+                <div class="reason">{slide.reason}</div>
             </a>
         {/each}
     </div>
@@ -192,11 +194,21 @@
         width: 25ch;
         padding: 10px;
 
+        line-height: 1.1;
+
         text-align: center;
 
         transition: transform 1s, font-weight 0.7s, font-size .7s;
 
         text-shadow: rgba(0, 0, 0, 1) 0 0 5px;
+
+        .subtitle {
+            font-size: .75em;
+        }
+
+        .reason {
+            margin-top: .4rem;
+        }
     }
 
     .current {
