@@ -104,6 +104,7 @@
         }
 
         .outer-main {
+            z-index: 1;
             display: grid;
             grid-template-rows: auto 1fr;
 

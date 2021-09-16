@@ -12,7 +12,9 @@
             <p>Voor bedrijven:&nbsp;<a title="acquisitie@svspectrum.nl" href="mailto:acquisitie@svspectrum.nl">acquisitie@svspectrum.nl</a></p>
         </div>
         <div class="logo">
-            <img src="/footer-logo.png" alt="Logo"/>
+            <a href="/backend/admin">
+                <img src="/footer-logo.png" alt="Logo"/>
+            </a>
         </div>
     </div>
 </footer>
@@ -30,7 +32,6 @@
 
         position: sticky;
         bottom: 0;
-        z-index: -2;
     }
 
     .footer-inner {
