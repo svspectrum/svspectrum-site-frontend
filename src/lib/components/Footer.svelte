@@ -12,7 +12,7 @@
             <p>Voor bedrijven:&nbsp;<a title="acquisitie@svspectrum.nl" href="mailto:acquisitie@svspectrum.nl">acquisitie@svspectrum.nl</a></p>
         </div>
         <div class="logo">
-            <a href="/backend/admin">
+            <a href="/backend/admin" rel="external">
                 <img src="/footer-logo.png" alt="Logo"/>
             </a>
         </div>
@@ -20,8 +20,6 @@
 </footer>
 
 <style lang="scss">
-
-
     footer {
         background-color: #313233;
         color: white;
