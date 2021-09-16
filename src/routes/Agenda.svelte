@@ -65,6 +65,7 @@
 
 <main>
     <div id="calendar" bind:this={calendarElement}></div>
+    <div class="calendar-info">De Spectrum agenda toevoegen aan je eigen agenda? <a href="/Agenda-Synchroniseren">Klik hier!</a></div>
 </main>
 
 <style lang="scss">
@@ -75,7 +76,12 @@
         --fc-today-bg-color: var(--secondary-color-transparent);
         width: 100%;
         padding: 1rem;
-        height: calc(100vh - 5rem);
+        height: calc(100vh - 7rem);
+    }
+
+    .calendar-info {
+        font-size: 1.3rem;
+        line-height: 2rem;
     }
 
     :global {
