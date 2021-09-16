@@ -39,11 +39,11 @@
             <div class="dropdown">
                 <button>Bibliotheek</button>
                 <div>
-                    <a href="Tentamens">Tentamens</a>
-                    <a href="Boekenverkoop">(Boeken) Winkel</a>
-                    <a href="Fotos">Foto's</a>
-                    <a href="Archief">Archief</a>
-                    <a href="Vacatures">Vacatures</a>
+                    <a href="/Tentamens">Tentamens</a>
+                    <a href="/Boekenverkoop">(Boeken) Winkel</a>
+                    <a href="/Fotos">Foto's</a>
+                    <a href="/Archief">Archief</a>
+                    <a href="/Vacatures">Vacatures</a>
                 </div>
             </div>
             <a href="/Word-Lid" class="action">Word Lid</a>
@@ -97,8 +97,6 @@
                 height: 100%;
             }
         }
-
-        
     }
 
     nav {
@@ -114,15 +112,14 @@
             color: white;
             
             &:hover {
-                background: rgba(0, 0, 0, 0.11)
+                background: rgba(0, 0, 0, 0.11);
             }
-
-            
+    
             &.action {
                 background-color: white;
                 color: black;
                 padding: 0.5rem;
-                margin: 1rem .5rem
+                margin: 1rem .5rem;
             }
         }
     }
@@ -145,7 +142,6 @@
                 padding: 3px;
                 transform: translate(0, -3px) rotate(45deg);
                 margin-left: 0.5rem;
-
             }
         }
 
