@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { INewsData } from "$lib/api/news";
     import NewsCard from "./NewsCard.svelte";
+    import Ad from "./Ad.svelte";
 
     export let news: INewsData[];
 </script>
@@ -11,6 +12,7 @@
     </div>
     <div class="top"></div>
     <div class="media">
+        <Ad />
         <div class="publish-date">
             <i>Gepost<br/>op</i>
         </div>
@@ -21,6 +23,19 @@
 </div>
 
 <style lang="scss">
+    .promo {
+        position: absolute;
+        inset: 20px;
+
+        mix-blend-mode: multiply;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
     .news-tree {
         --timeline-line-width: 4px;
         --publish-time-width: calc(7ch + 1rem);
