@@ -127,6 +127,7 @@
         });
     });
 </script>
+
 {#if movedSlides.length}
 <HeaderImageHolder> 
     <div class="image-carousel">
