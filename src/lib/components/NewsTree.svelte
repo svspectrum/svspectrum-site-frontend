@@ -23,19 +23,6 @@
 </div>
 
 <style lang="scss">
-    .promo {
-        position: absolute;
-        inset: 20px;
-
-        mix-blend-mode: multiply;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-    }
-
     .news-tree {
         --timeline-line-width: 4px;
         --publish-time-width: calc(7ch + 1rem);
