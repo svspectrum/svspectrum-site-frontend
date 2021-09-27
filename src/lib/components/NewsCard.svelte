@@ -18,7 +18,7 @@
             {#if item.type == "event"}
                 <Image image={item.image}/>
             {:else if item.type == "post"}
-                <Article markdown={item.content}/>
+                <Article>{@html item.content}</Article>
             {/if}
         </div>
         <div class="bottom">

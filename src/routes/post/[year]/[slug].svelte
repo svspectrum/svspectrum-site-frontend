@@ -38,7 +38,7 @@
 </svelte:head>
 
 <main>
-	<Article markdown={post.content} title={post.title}/>
+	<Article title={post.title}>{@html post.content}</Article>
 </main>
 
 <style lang="scss">

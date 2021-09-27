@@ -46,8 +46,8 @@
 </HeaderImageHolder>
 
 <main>
-	<Article markdown={event.description} title="Beschrijving" class="desc"/>
-	<Article markdown={event.info} title="Praktische Informatie" class="info"/>
+	<Article title="Beschrijving" class="desc">{@html event.description}</Article>
+	<Article title="Praktische Informatie" class="info">{@html event.info}</Article>
 	<Article title="Onderdelen" class="parts">
 		<table>
 			{#each event.parts as part}

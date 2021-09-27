@@ -1,24 +1,10 @@
 <script lang="ts">
-import { extension } from "$lib/api/markdownExtension";
-
-    import showdown from "showdown"; 
-    let { Converter } = showdown;
-    
     export let title : string = null;
-    export let markdown : string = null;
-
-    let converter = new Converter({headerLevelStart: 2, strikethrough: true, extensions: [extension]});
-    
-    let html : string;
-    $: html = markdown ? converter.makeHtml(markdown) : null;
 </script>
 
 <article class={$$props.class}>
     {#if title}
         <h1>{title}</h1>
-    {/if}
-    {#if html}
-        {@html html}
     {/if}
     <slot></slot>
 </article>
