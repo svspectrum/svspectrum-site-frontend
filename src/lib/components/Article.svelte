@@ -44,6 +44,7 @@
                 & img {
                     width: 100%;
                     display: block;
+                    mix-blend-mode: multiply;
                 }
 
                 &.image {
