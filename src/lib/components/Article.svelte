@@ -28,17 +28,63 @@
             border-radius: 50%/50%;
         }
 
-        :global(.right) {
-            float: right;
-        }
+        :global {
+            figure {
+                background-image: url("/paper-light.png");
+                box-shadow: 1px 2px 6px 0 rgba(0, 0, 0, 0.4);
 
-        :global(.left) {
-            float: left;
-        }
+                position: relative;
+                padding: .5em;
+                max-width: 100%;
+                margin: 1rem .5rem .5rem .5rem;
+                display: block;
+                box-sizing: border-box;
+                text-align: center;
 
-        :global(img) {
-            border: .5em solid white;
-            margin: .5em;
+                & img {
+                    width: 100%;
+                    display: block;
+                }
+
+                &.image {
+                    display: table;
+                }
+
+                &.image-style-align-right {
+                    float: right;
+                }
+
+                &.image-style-align-left {
+                    float: left;
+                }
+
+                &.image-style-align-center {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                &::before, &::after {
+                    content: "";
+                    position: absolute;
+                    width: 40px;
+                    height: 25px;
+                    background-color: rgba(209, 209, 209, 0.5);
+                    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
+                }
+
+                &::before {
+                    top: 3px;
+                    left: 0;
+
+                    transform:translate(-50%, -50%) rotate(-50deg);
+                }
+
+                &::after {
+                    bottom: 0;
+                    right: 0;
+                    transform:translate(50%, 50%) rotate(-40deg);
+                }
+            }
         }
     }
 </style>
