@@ -75,7 +75,7 @@ import { onMount } from "svelte";
                     <li class="subitem"><a href="/Vacatures">Vacatures</a></li>
                 </ul>
             </li>
-            <li class="item button"><a href="#">Log In</a></li>
+            <li class="item button"><a href="/Log-In">Log In</a></li>
             <li class="item button secondary"><a href="/Word-Lid">Word Lid</a></li>
             <!-- svelte-ignore a11y-invalid-attribute -->
             <li class="toggle"><a href="" on:click={toggleMenu}><i class="fas fa-bars" class:fa-bars={!menuIsOpen} class:fa-times={menuIsOpen}></i></a></li>
