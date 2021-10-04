@@ -156,7 +156,7 @@
 </HeaderImageHolder>
 {:else}
 <HeaderImageHolder> 
-    <img src={getBackendURL("uploads/placeholder_d972f74598.jpg")}>
+    <img src={getBackendURL("uploads/placeholder_d972f74598.jpg")} alt="Er zijn op het moment geen relevante evenementen :(">
 </HeaderImageHolder>
 {/if}
 
