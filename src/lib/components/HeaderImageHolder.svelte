@@ -1,30 +1,23 @@
+<script lang="ts">
+    let y;
+</script>
+
+<svelte:window bind:scrollY={y}/>
 
 <div class="image-header">
-    <div class="layer paralax-layer">
+    <div class="layer paralax-layer" style="transform: translate(0,{y * -0.3}px)">
         <slot></slot>
         <div class="shade"></div>
         <div class="color"></div>
     </div>
-    <div class="layer top-layer">
+    <div class="layer top-layer" style="transform: translate(0,{y * -0.6}px)">
         <slot name="top"></slot>
     </div>
 </div>
 
-
 <style lang="scss">
-    @use "sass:math";
-
-    $parallax-perspective: 10px;
-    $parallax-depth: -10px;
-    $parallax-scale: math.div($parallax-perspective - $parallax-depth, $parallax-perspective);
-
-    :global(.outer-main) {
-        perspective: $parallax-perspective;
-        perspective-origin: 50% 0%;
-    }
-
     .image-header {
-        transform-style: preserve-3d; 
+        overflow: hidden;
         position: sticky;
         top: 0;
         width: 100%;
@@ -43,10 +36,6 @@
         top: 0;
         width: 100%;
         height: 100%;
-    }
-
-    .paralax-layer {
-        transform: translateZ($parallax-depth) translateY(50%) scale($parallax-scale);
     }
 
     .shade {
