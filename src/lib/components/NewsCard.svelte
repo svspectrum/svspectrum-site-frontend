@@ -69,14 +69,6 @@
 
     article {
         position: relative;
-
-        &:nth-of-type(odd) .publish-date{
-            left: 100%;
-        }
-
-        &:nth-of-type(even) .publish-date{
-            right: 100%;
-        }
     }
 
     .top {
@@ -115,40 +107,6 @@
                     border-image: url("/fade-border.png") 20 round;
                 }
             }
-
-
-        }
-    }
-
-    .publish-date {
-        position: absolute;
-        top: 50%;
-        transform: translate(0%, -50%);
-
-        width: var(--publish-time-width);
-        text-align: center;
-        
-
-        &::after, &::before {
-            content: "";
-
-            position: absolute;
-            top: 50%;
-            transform: translate(-50%, -50%);
-
-            width: 1rem;
-            height: var(--timeline-line-width);
-            background-color: black;
-
-            border-radius: 6px/50%;
-        }
-
-        &::before {
-            left: calc(0% - var(--timeline-line-width)/2);
-        }
-
-        &::after {
-            left: calc(100% + var(--timeline-line-width)/2);
         }
     }
 </style>
