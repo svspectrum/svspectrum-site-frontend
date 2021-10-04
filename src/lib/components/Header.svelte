@@ -1,4 +1,30 @@
 <script lang="ts">
+import { onMount } from "svelte";
+
+
+    let menuIsOpen = false;
+    let subMenuIsOpen = false;
+    let subMenuButton : HTMLAnchorElement;
+
+    function closeMenus() {
+        menuIsOpen = false;
+        subMenuIsOpen = false;
+    }
+
+    function toggleMenu() {
+        menuIsOpen = !menuIsOpen;
+    }
+
+    function toggleSubMenu() {
+        subMenuIsOpen = !subMenuIsOpen;
+    }
+
+    function closeSubMenu(e) {
+        if (!subMenuButton.contains(e.target)) {
+            subMenuIsOpen = false;
+        }
+    }
+
     let width : number;
     let marks : {pos: number, size: number}[];
 
@@ -29,146 +55,43 @@
     $: marks = generateMarks(width);
 </script>
 
+<svelte:window on:click={closeSubMenu} on:sveltekit:navigation-end={closeMenus}/>
+
 <header bind:clientWidth={width}>
-    <div class="wrapper">
-        <a href="/" class="logo"><img src="/logo.svg" alt="Spectrum"/></a>
-        <nav>
-            <a href="/">Nieuws</a>
-            <a href="/Agenda">Agenda</a>
-            <a href="/Informatie">Informatie</a>
-            <div class="dropdown">
-                <button>Bibliotheek</button>
-                <div>
-                    <a href="/Tentamens">Tentamens</a>
-                    <a href="/Boekenverkoop">(Boeken) Winkel</a>
-                    <a href="/Fotos">Foto's</a>
-                    <a href="/Archief">Archief</a>
-                    <a href="/Vacatures">Vacatures</a>
-                </div>
-            </div>
-            <a href="/Word-Lid" class="action">Word Lid</a>
-        </nav>
-        <svg>
-            {#each marks as mark}
-                <line x1={mark.pos} x2={mark.pos} y1={15} y2={15-mark.size*10} stroke-width={mark.size*2}/>
-            {/each}
-        </svg>
-    </div>
+    <nav>
+        <ul class="menu" class:active={menuIsOpen}>
+            <li class="logo"><a href="/"><img src="/logo.svg" alt="Spectrum"/></a></li>
+            <li class="item"><a href="/">Nieuws</a></li>
+            <li class="item"><a href="/Agenda">Agenda</a></li>
+            <li class="item"><a href="/Informatie">Informatie</a></li>
+            <li class="item has-submenu" class:submenu-active={subMenuIsOpen}>
+                <!-- svelte-ignore a11y-missing-attribute -->
+                <a tabindex="0" on:click={toggleSubMenu} bind:this={subMenuButton}>Bibliotheek</a>
+                <ul class="submenu">
+                    <li class="subitem"><a href="/Tentamens">Tentamens</a></li>
+                    <li class="subitem"><a href="/Boekenverkoop">(Boeken) Winkel</a></li>
+                    <li class="subitem"><a href="/Fotos">Foto's</a></li>
+                    <li class="subitem"><a href="/Archief">Archief</a></li>
+                    <li class="subitem"><a href="/Vacatures">Vacatures</a></li>
+                </ul>
+            </li>
+            <li class="item button"><a href="#">Log In</a></li>
+            <li class="item button secondary"><a href="/Word-Lid">Word Lid</a></li>
+            <!-- svelte-ignore a11y-invalid-attribute -->
+            <li class="toggle"><a href="" on:click={toggleMenu}><i class="fas fa-bars" class:fa-bars={!menuIsOpen} class:fa-times={menuIsOpen}></i></a></li>
+        </ul>
+    </nav>
+    <svg>
+        {#each marks as mark}
+            <line x1={mark.pos} x2={mark.pos} y1={15} y2={15-mark.size*10} stroke-width={mark.size*2}/>
+        {/each}
+    </svg>
 </header>
 
 <style lang="scss">
     :root {
         --header-line-height: 1em;
         --header-height: calc(3rem + var(--header-line-height));
-    }
-
-    header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-
-        display: flex;
-        justify-content: center;
-
-        min-height: var(--header-height);
-
-        color: white;
-        background-color: var(--primary-color-transparent);
-        backdrop-filter: contrast(100%) blur(10px);
-
-        z-index: 10;
-
-        line-height: var(--header-line-height);
-
-        .wrapper {
-            flex-grow: 1;
-            max-width: 120ch;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: stretch;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            height: var(--header-height);
-
-            img {
-                height: 100%;
-            }
-        }
-    }
-
-    nav {
-        z-index: 11;
-        display: flex;
-
-        a, button {
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            margin: 0;
-            padding: 1.5rem 1rem;
-            color: white;
-            
-            &:hover {
-                background: rgba(0, 0, 0, 0.11);
-            }
-    
-            &.action {
-                background-color: white;
-                color: black;
-                padding: 0.5rem;
-                margin: 1rem .5rem;
-            }
-        }
-    }
-
-    .dropdown {
-        position: relative;
-        display: inline-block;
-
-        &>button {
-            background: none;
-            border: none;
-            color: inherit;
-            font: inherit;
-
-            &::after {
-                content: "";
-                border: solid white;
-                border-width: 0 3px 3px 0;
-                display: inline-block;
-                padding: 3px;
-                transform: translate(0, -3px) rotate(45deg);
-                margin-left: 0.5rem;
-            }
-        }
-
-        &>div {
-            display: none;
-
-            position: absolute;
-            top: 100%;
-            left: 0;
-            min-width: 100%;
-
-            background: white;
-
-            a {
-                color: black;
-                right: 0;
-                width: 100%;
-                margin: 0;
-                padding: 1rem .5rem;
-
-                box-sizing: border-box;
-            }
-        }
-
-        &:hover > div {
-            display: block;
-        }
     }
 
     svg {
@@ -181,6 +104,244 @@
         line {
             stroke: white;
             opacity: .9;
+        }
+    }
+
+    header {
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+        background-color: var(--primary-color-transparent);
+        backdrop-filter: contrast(100%) blur(10px);
+    }
+
+    nav {
+        flex: 1;
+        padding: 0 15px;
+        color: white;
+        max-width: 1400px;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+    }
+
+    li {
+        margin: 0;
+    }
+
+    .item, .subitem {
+        > a {
+            // padding: 1.5rem 1rem;
+
+            &:hover {
+                background: rgba(0, 0, 0, 0.11);
+            }
+        }
+    }
+
+    .has-submenu {
+        user-select: none;
+    }
+    
+    // .item.button {
+    //     padding: .25em;
+    // }
+
+    /* Mobile menu */
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+
+        &.active {
+            margin-bottom: 15px;
+        }
+
+        li a {
+            display: block;
+            padding: .5em;
+        }
+
+        li.logo {
+            a {
+                display: flex;
+                padding: 0;
+                img {
+                    height: var(--header-height);
+                }
+            }
+        }
+
+        li.toggle a {
+            padding: 1em;
+        }
+
+        // li.subitem a {
+        //     padding: 15px;
+        // }
+    }
+    
+    .toggle {
+        order: 1;
+        font-size: 1em;
+    }
+    .item.button {
+        order: 2;
+    }
+    .item {
+        order: 3;
+        width: 100%;
+        text-align: center;
+        display: none;
+    }
+    .active .item {
+        display: block;
+    }
+    .button.secondary {
+        /* divider between buttons and menu links */
+        border-bottom: 2px white solid;
+    }
+    /* Submenu up from mobile screens */
+    .submenu {
+        display: none;
+    }
+    .submenu-active .submenu {
+        display: block;
+    }
+    .has-submenu > a::after {
+        font-family: "Font Awesome 5 Free";
+        font-size: .75em;
+        line-height: 1em;
+        font-weight: 900;
+        content: "\f078";
+        padding-left: 5px;
+    }
+    .subitem a {
+        padding: 10px 15px;
+    }
+    .submenu-active {
+        // background-color: var(--primary-color-transparent);;
+        background: white;
+        color: black;
+    }
+
+    /* Tablet menu */
+    @media all and (min-width: 700px) {
+        .menu {
+            justify-content: center;
+        }
+        .logo {
+            flex: 1;
+        }
+        .item.button {
+            width: auto;
+            order: 1;
+            display: block;
+        }
+        .toggle {
+            flex: 1;
+            text-align: right;
+            order: 2;
+        }
+        /* Button up from tablet screen */
+        .menu li.button a {
+            padding: .3em .7em;
+        }
+        .button.secondary {
+            border: 0;
+        }
+        .button a {
+            --border-radius: .5em;
+            border: 1px white solid;
+            box-shadow: var(--primary-color) 0px 4px 0px;
+            transform: translate(0px, -3px);
+
+            &:hover, &:active {
+                box-shadow: var(--primary-color) 0px 2px 0px;
+                transform: translate(0px, -1px);
+            }
+            transition-timing-function: linear;
+            transition: transform .1s, box-shadow .1s, background-color .1s;
+        }
+        .button:not(.secondary) a {
+            background: white;
+            color: black;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+
+            &:hover, &:active {
+                background: #eee;
+            }
+        }
+        .button.secondary a {
+            background-color: var(--primary-color);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin-left: -1px;
+        }
+    }
+    /* Desktop menu */
+    @media all and (min-width: 960px) {
+        .menu {
+            // align-items: stretch;
+            flex-wrap: nowrap;
+            
+            &.active {
+                margin-bottom: 0;
+            }
+        }
+        .logo {
+            order: 0;
+        }
+        .item:not(.button) {
+            order: 1;
+            position: relative;
+            display: inline;
+            width: auto;
+            height: var(--header-height);
+            
+
+            &>a {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                vertical-align: middle;
+                padding: 0 1em;
+            }
+        }
+        .button {
+            order: 2;
+
+            &:not(.secondary) {
+                margin-left: .5em;
+            }
+        }
+
+        .submenu-active {
+            background: none;
+            color: inherit;
+        }
+
+        .submenu-active .submenu {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background: white;
+            color: black;
+            box-shadow: #00000099 0px 2px 6px;
+        }
+        .toggle {
+            display: none;
         }
     }
 </style>

@@ -25,6 +25,7 @@
 	<meta name="msapplication-TileColor" content="#FFFFFF">
 	<meta name="msapplication-TileImage" content="/favicon-144.png">
 	<meta name="msapplication-config" content="/browserconfig.xml">
+    <script src="https://kit.fontawesome.com/ca925cf2da.js" crossorigin="anonymous"></script>
 </svelte:head>
 
 <Header />
@@ -40,6 +41,7 @@
 <style lang="scss">
     :global {
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
