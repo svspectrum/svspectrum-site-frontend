@@ -163,6 +163,7 @@ import { onMount } from "svelte";
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
+        min-height: var(--header-height);
 
         &.active {
             margin-bottom: 15px;
@@ -234,6 +235,18 @@ import { onMount } from "svelte";
         // background-color: var(--primary-color-transparent);;
         background: white;
         color: black;
+    }
+
+    /* Small phone menu */
+    @media all and (max-width: 420px) {
+        .logo {
+            display: none;
+        }
+
+        .toggle {
+            flex: 1;
+            text-align: right;
+        }
     }
 
     /* Tablet menu */
