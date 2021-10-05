@@ -7,7 +7,7 @@
 
 <style lang="scss">
     div {
-        --welcome-height: calc(100vh - 25vw - var(--header-height) - 2rem - 12px);
+        --welcome-height: calc(100vh - max(25vw, 40vh) - var(--header-height) - 2rem - 12px);
         display: flex;
         flex-direction: column;
         align-content: center;
@@ -15,9 +15,6 @@
         text-align: center;
         text-shadow: 0px 2px 2px white;
         min-height: var(--welcome-height);
-    }
-
-    h1 {
     }
 
     a {
