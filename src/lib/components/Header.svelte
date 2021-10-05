@@ -60,7 +60,10 @@ import { onMount } from "svelte";
 <header bind:clientWidth={width}>
     <nav>
         <ul class="menu" class:active={menuIsOpen}>
-            <li class="logo"><a href="/"><img src="/logo.svg" alt="Spectrum"/></a></li>
+            <li class="logo"><a href="/">
+                <img class="big-logo" src="/white-logo-transparent-big.svg" alt="Spectrum"/>
+                <img class="small-logo" src="/white-logo-transparent.svg" alt="Spectrum"/>
+            </a></li>
             <li class="item"><a href="/">Nieuws</a></li>
             <li class="item"><a href="/Agenda">Agenda</a></li>
             <li class="item"><a href="/Informatie">Informatie</a></li>
@@ -176,6 +179,7 @@ import { onMount } from "svelte";
 
         li.logo {
             a {
+                width: max-content;
                 display: flex;
                 padding: 0;
                 img {
@@ -236,16 +240,18 @@ import { onMount } from "svelte";
         background: white;
         color: black;
     }
+    .small-logo {
+        display: none;
+    }
 
     /* Small phone menu */
     @media all and (max-width: 420px) {
-        .logo {
-            display: none;
+        .small-logo {
+            display: initial;
+            padding: .75em;
         }
-
-        .toggle {
-            flex: 1;
-            text-align: right;
+        .big-logo {
+            display: none;
         }
     }
 
@@ -264,7 +270,8 @@ import { onMount } from "svelte";
         }
         .toggle {
             flex: 1;
-            text-align: right;
+            display: flex;
+            flex-direction: row-reverse;
             order: 2;
         }
         /* Button up from tablet screen */
