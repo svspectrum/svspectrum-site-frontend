@@ -21,6 +21,8 @@
         position: sticky;
         top: 0;
         width: 100%;
+        min-width: 100%;
+        max-width: 100%;
         aspect-ratio: 4/1;
         box-sizing: content-box;
         min-height: 40vh;
