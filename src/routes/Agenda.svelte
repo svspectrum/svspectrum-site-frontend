@@ -28,8 +28,12 @@
         const daygridPlugin = (await daygridPluginPromise).default;
         const timegridPlugin = (await timegridPluginPromise).default;
         const listPlugin = (await listPluginPromise).default;
-        const localeNLPlugin = (await localeNLPluginPromise).default.default;
         const iCalendarPlugin = (await iCalendarPluginPromise).default;
+
+        let localeNLPlugin : any = (await localeNLPluginPromise).default;
+        if (localeNLPlugin.default) { 
+            localeNLPlugin = localeNLPlugin.default; // I don't know man
+        }
         // End black magic code hell
 
         console.log(localeNLPlugin);
