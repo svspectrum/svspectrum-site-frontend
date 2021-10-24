@@ -29,6 +29,7 @@
 <script lang="ts">
     import Article from "$lib/components/Article.svelte";
     import type { IPostData } from "$lib/api/post";
+	import Doodles from "$lib/components/Doodles.svelte";
     
     export let post: IPostData;
 </script>
@@ -38,6 +39,7 @@
 </svelte:head>
 
 <main>
+	<Doodles/>
 	<Article title={post.title}>{@html post.content}</Article>
 </main>
 

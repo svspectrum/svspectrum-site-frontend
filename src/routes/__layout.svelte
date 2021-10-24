@@ -120,6 +120,11 @@
             background-image: url("/paper.png");
             position: relative;
             grid-row: span 2;
+            z-index: -1;
+
+            & > * {
+                z-index: 0;
+            }
 
             &::before, &::after {
                 content: "";
@@ -128,6 +133,7 @@
                 left: 0;
                 right: 0;
                 height: 30px;
+                z-index: 0;
             }
 
             &::before {

@@ -27,6 +27,7 @@
 
 <script lang="ts">
     import type { IInfoData } from "$lib/api/info";
+    import Doodles from "$lib/components/Doodles.svelte";
     
     export let info: IInfoData;
 </script>
@@ -36,6 +37,7 @@
 </svelte:head>
 
 <main>
+    <Doodles/>
     {#each info.catagory as catagory}
         <div class="category" id={`c-${catagory.title}`}>
             <h1>{catagory.title}</h1>

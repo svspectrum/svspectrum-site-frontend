@@ -40,7 +40,9 @@
 
         padding: 0rem 1rem 2rem 1rem;
         box-sizing: border-box;
-
+        
+        z-index: unset;
+        
         .media {
             position: relative;
         }

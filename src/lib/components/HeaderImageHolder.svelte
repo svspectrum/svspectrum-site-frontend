@@ -26,6 +26,7 @@
         aspect-ratio: 4/1;
         box-sizing: content-box;
         min-height: 40vh;
+        z-index: -1;
         
         :global(img) {
             position: absolute;

@@ -30,7 +30,7 @@
 <script lang="ts">
     import type { INewsData } from "$lib/api/news";
 	import type { IRelevantData } from "$lib/api/relevant";
-
+	
     import NewsTree from "$lib/components/NewsTree.svelte";
 	import Relevant from "$lib/components/Relevant.svelte";
 	import Welcome from "$lib/components/Welcome.svelte";

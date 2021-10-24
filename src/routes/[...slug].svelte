@@ -28,6 +28,7 @@
 
 <script lang="ts">
     import Article from "$lib/components/Article.svelte";
+	import Doodles from "$lib/components/Doodles.svelte";
 
     export let article: any;
 </script>
@@ -37,6 +38,7 @@
 </svelte:head>
 
 <main>
+	<Doodles/>
 	<Article title={article.title}>{@html article.content}</Article>
 </main>
 

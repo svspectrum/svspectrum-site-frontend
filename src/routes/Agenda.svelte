@@ -3,6 +3,7 @@
 </script>
 
 <script lang="ts">
+    import Doodles from '$lib/components/Doodles.svelte';
     import { onMount } from 'svelte';
 
     let calendarElement: HTMLElement;
@@ -68,6 +69,7 @@
 </svelte:head>
 
 <main>
+    <Doodles/>
     <div id="calendar" bind:this={calendarElement}></div>
     <div class="calendar-info">De Spectrum agenda toevoegen aan je eigen agenda? <a href="/Agenda-Synchroniseren">Klik hier!</a></div>
 </main>

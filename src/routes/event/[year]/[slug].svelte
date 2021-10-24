@@ -30,6 +30,7 @@
 	import type { IEventData } from "$lib/api/event"
 
     import Article from "$lib/components/Article.svelte";
+	import Doodles from "$lib/components/Doodles.svelte";
 	import HeaderImageHolder from "$lib/components/HeaderImageHolder.svelte";
 	import Image from "$lib/components/Image.svelte";
 
@@ -46,6 +47,7 @@
 </HeaderImageHolder>
 
 <main>
+	<Doodles/>
 	<Article title="Beschrijving" class="desc">{@html event.description}</Article>
 	<Article title="Praktische Informatie" class="info">{@html event.info}</Article>
 	<Article title="Onderdelen" class="parts">
