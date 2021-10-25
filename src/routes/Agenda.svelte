@@ -65,6 +65,7 @@
 </script>
 
 <svelte:head>
+    <link rel="preload" href="/agenda.ics">
     <title>Spectrum Agenda</title>
 </svelte:head>
 
