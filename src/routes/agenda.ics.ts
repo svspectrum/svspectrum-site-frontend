@@ -15,5 +15,4 @@ export async function get({ params }) {
             body: await res.text(),
         }
     }
-    
 }
