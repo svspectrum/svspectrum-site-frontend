@@ -39,7 +39,6 @@
     "@fullcalendar/icalendar": "^5.9.0",
     "@fullcalendar/list": "^5.9.0",
     "@fullcalendar/timegrid": "^5.9.0",
-    "dayjs": "^1.10.6",
-    "showdown": "^1.9.1"
+    "dayjs": "^1.10.6"
   }
 }
