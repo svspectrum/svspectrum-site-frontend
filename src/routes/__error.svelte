@@ -18,6 +18,7 @@
 
 <script lang="ts">
     import Article from "$lib/components/Article.svelte";
+	import Doodles from "$lib/components/Doodles.svelte";
 
     export let status: number;
 	export let message: string;
@@ -25,6 +26,7 @@
 </script>
 
 <main>
+	<Doodles/>
 	<Article title={`${status}`}>{message}</Article>
 </main>
 

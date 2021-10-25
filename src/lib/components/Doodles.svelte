@@ -46,12 +46,12 @@
         }
 
         for (let i = 0; i < amount; i++) {
-            let doodle : number;
+            let id : number;
             do {
-                doodle = randomInteger(min, max);
-            } while (doodles.includes(doodle));
+                id = randomInteger(min, max);
+            } while (doodles.find(doodle => doodle.id == id));
 
-            doodles.push({id: doodle, x: i});
+            doodles.push({id: id, x: i});
         }
 
         do {
@@ -83,11 +83,14 @@
         position: absolute;
         inset: 0;
         overflow: hidden;
+        z-index: -1;
     }
 
     img {
         position: absolute;
         transform: translate(-50%, -50%);
         opacity: .08;
+        user-select: none;
+        pointer-events: none;
     }
 </style>
