@@ -74,7 +74,7 @@
 
 <div class="doodles">
     {#each doodles as doodle}
-        <img transition:fade|local={{duration: 2000, easing: quadOut}} src={`/doodles/1/${doodle.id}.png`} style={`top: ${doodle.y*100}%; left: ${doodle.x*100}%; max-width: ${100/amount}%; max-height: ${Math.min(100,200/amount)}%;`}/>
+        <img transition:fade|local={{duration: 2000, easing: quadOut}} src={`/doodles/1/${doodle.id}.png`} style={`top: ${doodle.y*100}%; left: ${doodle.x*100}%; max-width: ${100/amount}%; max-height: ${Math.min(100,200/amount)}%;`} alt="" role="presentation"/>
     {/each}
 </div>
 
