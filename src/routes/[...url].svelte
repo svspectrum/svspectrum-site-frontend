@@ -5,9 +5,9 @@
     /**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
-    export async function load({ page, fetch, session, context }) {
-		const slug = page.params.slug;
-		let {res, page: article} = await getPage(slug);
+    export async function load({ url, params, session }) {
+		const pageUrl = `/${params.url}`;
+		let {res, page: article} = await getPage(pageUrl, session.jwt);
 
 		if (res.ok) {
 			if (article) {
@@ -17,10 +17,22 @@
 					}
 				};
 			}
+		} else if (res.status == 401) {
+			let redirect = "/Log-In?redirected=" + url.pathname;
+			
+			try {
+				const json = await res.json();
+				redirect = json?.redirect ?? redirect;
+			} catch (e) {}
+			
+			return {
+				status: 302,
+				redirect: redirect
+			}
 		} else {
 			return {
 				status: res.status,
-				error: new Error(`Could not load ${slug}`)
+				error: new Error(`Could not load ${url}`)
 			};
 		}
 	}

@@ -1,8 +1,10 @@
 <script lang="ts">
     export let title : string = null;
+
+    let h: number;
 </script>
 
-<article class={$$props.class}>
+<article class={$$props.class} bind:clientHeight={h} style={`grid-row: span ${Math.floor(h/10)}`}>
     {#if title}
         <h1>{title}</h1>
     {/if}
@@ -11,8 +13,9 @@
 
 <style lang="scss">
     article {
+        --max-article-width: calc(75ch + 2rem);
         position: relative;
-        max-width: calc(75ch + 2rem);
+        max-width: var(--max-article-width);
         padding: 1rem;
         width: 100%;
         box-sizing: border-box;
@@ -49,19 +52,19 @@
 
                 &.image {
                     display: table;
+
+                    &:not(.image-style-side) {
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
                 }
 
-                &.image-style-align-right {
+                &.image-style-side {
                     float: right;
                 }
 
-                &.image-style-align-left {
-                    float: left;
-                }
-
-                &.image-style-align-center {
-                    margin-left: auto;
-                    margin-right: auto;
+                &.image_resized {
+                    min-width: calc(var(--max-article-width) / 4);
                 }
 
                 &::before, &::after {
@@ -88,4 +91,14 @@
             }
         }
     }
+
+    @media only screen and (max-width: 70ch) {
+		article {
+			padding: .5em .2em;
+
+            &::before {
+                content: none;
+            }
+		}
+	}
 </style>

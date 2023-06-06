@@ -1,7 +1,8 @@
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
 import { fetchBackend } from "./backend";
-import { IEventData, parseEvent } from "./event";
+import { type IEventData, parseEvent } from "./event";
+import { createResponseParser } from "./response";
 
 export type IRelevantData = IRelevantEnrolData | IRelevantPartData;
 
@@ -30,9 +31,9 @@ export interface IRelevantPartData extends IRelevantBaseData {
     end: Dayjs;
 }
 
-export async function getRelevant() {
+export async function getRelevant(jwt: string) {
     const path = 'relevant';
-    const res = await fetchBackend(path);
+    const res = await fetchBackend(path, jwt);
     
     let relevant : IRelevantData[];
     if (res.ok) {
@@ -42,8 +43,8 @@ export async function getRelevant() {
     return {res, relevant}
 }
 
-export function parseRelevant(relevant: IRelevantData) {
-    if (relevant) {
+export const parseRelevant = createResponseParser((relevant: any) => {
+    if (typeof relevant === 'object' && relevant !== null) {
         let parsed : IRelevantData = {...relevant};
 
         parsed.event = parseEvent(parsed.event);
@@ -57,4 +58,4 @@ export function parseRelevant(relevant: IRelevantData) {
 
         return parsed;
     }
-}
+});

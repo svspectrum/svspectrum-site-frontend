@@ -1,12 +1,20 @@
-<script>
+<script lang="ts">
+    import dayjs from "dayjs";
     import Doodles from "./Doodles.svelte";
+
+    let month = dayjs().month();
 </script>
 
 <div>
     <Doodles amount={1}/>
     <h1>
-        Welkom bij studie vereniging spectrum!
-        <a href="/Word-Lid">Wil je Lid worden?</a>
+        {#if (month >= 5 && month <= 7)}
+             Ga jij Bèta-gamma of FPS doen?
+             <a href="/Eerstejaarsdagen">Kom naar onze eerstejaarsdagen!</a>
+        {:else}
+            Welkom bij studie vereniging spectrum!
+            <a href="/Word-Lid">Wil je Lid worden?</a>
+        {/if}
     </h1>
 </div>
 

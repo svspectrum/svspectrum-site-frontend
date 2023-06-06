@@ -37,8 +37,6 @@
         }
         // End black magic code hell
 
-        console.log(localeNLPlugin);
-
         let calendar = new fullCalendar.Calendar(calendarElement, {
             plugins: [
                 daygridPlugin,
@@ -83,7 +81,7 @@
         --fc-today-bg-color: var(--secondary-color-transparent);
         width: 100%;
         padding: 1rem;
-        height: calc(100vh - 7rem);
+        height: calc(100vh - var(--header-height) - 3rem);
     }
 
     .calendar-info {

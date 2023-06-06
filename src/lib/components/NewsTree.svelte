@@ -2,28 +2,48 @@
     import type { INewsData } from "$lib/api/news";
     import NewsCard from "./NewsCard.svelte";
     import Ad from "./Ad.svelte";
+    import dayjs from "dayjs";
 
     export let news: INewsData[];
+    export let archive: boolean;
+
+    let sortedNews;
+    $: sortedNews = news
+        .filter(item => item.end.isBefore(dayjs()) == archive)
+        .sort((a, b) => (archive ? -1 : 1) * a.begin.diff(b.begin))
+
 </script>
 
-<div class="news-tree">
-    <div class="top"></div>
-    <div class="media">
-        <Ad />
-        <div class="publish-date">
-            <i>Gepost<br/>op</i>
+{#if sortedNews.length > 0}
+    <div class="news-tree">
+        <div class="top"></div>
+        <div class="media">
+            <Ad offset = {archive ? 1 : 0}/>
+            <div class="publish-date">
+                <i>{archive ? "Begon" : "Begint"}<br/>op</i>
+            </div>
         </div>
+        <div class="timeline">
+            <h1>{archive ? "Oud Nieuws" : "Nieuws"}</h1>
+        </div>
+        {#each sortedNews as item (item.url)}
+            <NewsCard item={item} />
+        {/each}
     </div>
-    <div class="timeline">
-        <h1>Nieuws</h1>
-    </div>
-    {#each news as item (item.slug)}
-        <NewsCard item={item}/>
-    {/each}
-</div>
+{/if}
 
 <style lang="scss">
+    .news-tree + .news-tree  {
+        .timeline {
+            margin-top: 2px;
+            h1 {
+                border-top: black solid 4px;
+            }
+        }
+    }
+
     .news-tree {
+        --news-tree-padding: min(1rem, 3vw);
         --timeline-line-width: 4px;
         --publish-time-width: calc(7ch + 1rem);
         --timeline-width: calc(var(--timeline-line-width) + var(--publish-time-width)*2);
@@ -34,11 +54,11 @@
         overflow: hidden;
         grid-template-columns:  1fr;
         grid-template-rows: auto 1fr auto [last-line];
-        grid-auto-rows: 1fr;
+        grid-auto-rows: auto;
         grid-auto-flow: row dense;
         row-gap: 2rem;
 
-        padding: 0rem 1rem 2rem 1rem;
+        padding: 0rem var(--news-tree-padding) 2rem var(--news-tree-padding);
         box-sizing: border-box;
         
         z-index: unset;
@@ -54,6 +74,8 @@
 
                 border-bottom: black solid 4px;
                 padding: 0 .3ch;
+
+                width: max-content;
             }
         }
 
@@ -112,6 +134,10 @@
                 transform: translate(0%, -50%);
                 width: var(--publish-time-width);
                 text-align: center;
+
+                :global(span) {
+                    font-size: 0.85rem;
+                }
             
                 &::after, &::before {
                     content: "";

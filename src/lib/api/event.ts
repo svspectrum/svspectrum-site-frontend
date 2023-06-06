@@ -1,18 +1,22 @@
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
-import type { IImageData } from "./image";
+import { type IImageData, parseImage } from "./image";
 import { fetchBackend } from "./backend";
+import { type IPostData, parsePost } from "./post";
+import { createResponseParser } from "./response";
 
 export interface IEventData {
     type: "event";
     id: number;
     title:string;
     description:string;
-    info: string;
-    slug: string;
-    published_at: Dayjs;
-    created_at: Dayjs;
-    updated_at: Dayjs;
+    packing_list: string;
+    price: string;
+    extra_info: string;
+    url: string;
+    publishedAt: Dayjs;
+    createdAt: Dayjs;
+    updatedAt: Dayjs;
     parts: {
         id: number;
         title: string;
@@ -25,41 +29,62 @@ export interface IEventData {
         title: string;
         url: string;
         deadline: Dayjs|null;
-        spots: number;
+        limit: number;
         open: boolean;
     }[];
+    updates?: IPostData[];
     image: IImageData;
+    begin: Dayjs;
+    end: Dayjs;
 }
 
-export async function getEvent(slug : string) {
-    const path = `events?slug=${slug}`;
-    const res = await fetchBackend(path);
-    let event;
+export async function getEvent(url : string, jwt: string) {
+    const path = `events?filters[url][$eq]=${url}&populate=*`;
+    const res = await fetchBackend(path, jwt);
+    let event : IEventData;
+
     if (res.ok) {
-        event = parseEvent((await res.json())[0]);
+        const json = await res.json();
+        event = parseEvent(json.data)[0];
     }
 
     return {res, event};
 }
 
-export function parseEvent(event: IEventData) {
-    if (event) {
+export const parseEvent = createResponseParser((event: any) => { 
+    if (typeof event === 'object' && event !== null) {
         let parsed : IEventData = {...event};
-        parsed.published_at = dayjs(parsed.published_at);
-        parsed.created_at = dayjs(parsed.created_at);
-        parsed.updated_at = dayjs(parsed.updated_at);
+        
+        parsed.publishedAt = dayjs(parsed.publishedAt);
+        parsed.createdAt = dayjs(parsed.createdAt);
+        parsed.updatedAt = dayjs(parsed.updatedAt);
+        
+        if (parsed.parts) {
+            for (const part of parsed.parts) {
+                part.begin = dayjs(part.begin);
+                part.end = dayjs(part.end);
 
-        for (const part of parsed.parts) {
-            part.begin = dayjs(part.begin);
-            part.end = dayjs(part.end);
+                if (!parsed.begin || parsed.begin.isAfter(part.begin)) {
+                    parsed.begin = part.begin
+                }
+                if (!parsed.end || parsed.end.isAfter(part.end)) {
+                    parsed.end = part.begin
+                }
+            }
+        }
+        
+        if (parsed.enrol) {
+            for (const enrol of parsed.enrol) {
+                enrol.deadline = dayjs(enrol.deadline);
+            }
         }
 
-        for (const enrol of parsed.enrol) {
-            enrol.deadline = dayjs(enrol.deadline);
-        }
+        parsed.updates = parsePost(parsed.updates)
+        
+        parsed.image = parseImage(parsed.image)
 
         return parsed;
     } else {
-        return event;
+        return null;
     }
-}
+});

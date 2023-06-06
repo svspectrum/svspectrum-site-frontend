@@ -1,14 +1,27 @@
 const backendURL = "https://www.svspectrum.nl/backend";
-// const backendURL = "http://localhost:1337";
+// const backendURL = "http://localhost:1337/backend";
 
-export function getBackendURL(path: string) {
+export function getBackendURL(path: string, API: boolean = false) {
+    if (path == null) {
+        return "";
+    }
+    
+    const baseURL = API ? `${backendURL}/api` : backendURL;
     if (path.charAt(0) == '/') {
-        return `${backendURL}${path}`
+        return `${baseURL}${path}`
     } else {
-        return `${backendURL}/${path}`
+        return `${baseURL}/${path}`
     }
 }
 
-export async function fetchBackend(path: string, init?: RequestInit) {
-	return fetch(getBackendURL(path), init);
+export async function fetchBackend(path: string, jwt: string, init?: RequestInit) {    
+    const fullPath = getBackendURL(path, true);
+    
+    if (jwt) {
+        const initWithPassword = {...init, headers: { Authorization: `Bearer ${jwt}`, ...init?.headers}}
+        
+        return fetch(fullPath, initWithPassword);
+    } else {
+        return fetch(fullPath, init);
+    }
 }

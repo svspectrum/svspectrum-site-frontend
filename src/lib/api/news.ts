@@ -1,25 +1,27 @@
 import { fetchBackend } from "./backend";
-import { IEventData, parseEvent } from "./event";
-import { IPostData, parsePost } from "./post";
+import { type IEventData, parseEvent } from "./event";
+import { type IPostData, parsePost } from "./post";
+import { createResponseParser } from "./response";
 
 export type INewsData = IEventData | IPostData
 
-export async function getNews() {
+export async function getNews(jwt: string) {
     const path = 'news';
-    const res = await fetchBackend(path);
-    
+    const res = await fetchBackend(path, jwt);
     let news: INewsData[];
+
     if (res.ok) {
-        news = (await res.json()).map(parseNewsItem);
+        const json = await res.json()
+        news = parseNewsItem(json);
     }
 
     return {res, news};
 }
 
-export function parseNewsItem(item: INewsData) {
+export const parseNewsItem = createResponseParser((item: INewsData) => {
     if (item.type == "event") {
         return parseEvent(item);
     } else if (item.type == "post") {
         return parsePost(item);
     }
-}
+});

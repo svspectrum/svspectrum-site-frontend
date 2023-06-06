@@ -5,9 +5,9 @@
     /**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
-    export async function load({ page, fetch, session, context }) {
-		let {res: resNews, news} = await getNews();
-		let {res: resRelevant, relevant} = await getRelevant();
+    export async function load({ session }) {
+		let {res: resNews, news} = await getNews(session.jwt);
+		let {res: resRelevant, relevant} = await getRelevant(session.jwt);
 
 		if (resNews.ok && resRelevant.ok) {
 			if (news) {
@@ -47,5 +47,6 @@
 
 <main>
 	<Welcome />
-    <NewsTree news={news}/>
+    <NewsTree news={news} archive={false}/>
+    <NewsTree news={news} archive={true}/>
 </main>

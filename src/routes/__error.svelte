@@ -22,7 +22,6 @@
 
     export let status: number;
 	export let message: string;
-	$: console.log(status, message);
 </script>
 
 <main>

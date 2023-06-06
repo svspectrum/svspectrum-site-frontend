@@ -1,6 +1,31 @@
 <script>
     import Header from "$lib/components/Header.svelte";
     import Footer from "$lib/components/Footer.svelte";
+    import { beforeNavigate } from "$app/navigation";
+
+    beforeNavigate(navigation => {
+        // Bypass SvelteKits internal navigation when navigating to files or the backend
+        if (navigation.to) {
+            const path = navigation.to.pathname;
+            const hasExtension = path.search(/\..+/g) != -1;
+            const fromBackend = path.search(/^\/?backend\//g) != -1;
+
+            if (hasExtension) {
+                const link = document.createElement("a");
+                link.setAttribute("download", "");
+                link.href = navigation.to.toString();
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+
+                navigation.cancel();
+            } else if (fromBackend) {
+                location.assign(navigation.to);
+            }
+        }
+    });
+
+
 </script>
 
 <svelte:head>
@@ -22,6 +47,9 @@
 	<link rel="apple-touch-icon" sizes="76x76" href="/favicon-76.png">
 	<link rel="apple-touch-icon" sizes="152x152" href="/favicon-152.png">
 	<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
+    <link rel="preload" href="/paper.png" as="image">
+    <link rel="preload" href="/torn-paper-top.png" as="image">
+    <link rel="preload" href="/torn-paper-bottom.png" as="image">
 	<meta name="msapplication-TileColor" content="#FFFFFF">
 	<meta name="msapplication-TileImage" content="/favicon-144.png">
 	<meta name="msapplication-config" content="/browserconfig.xml">
@@ -38,7 +66,7 @@
 
 <Footer />
 
-<img class="under-construction" src="/underconstruction.png" alt="site word aan gewerkt">
+<!-- <img class="under-construction" src="/underconstruction.png" alt="site word aan gewerkt"> -->
 
 <style lang="scss">
     :global {
@@ -53,18 +81,25 @@
             --primary-color-transparent: #0080a28a;
             --secondary-color: #4ab3d6;
             --secondary-color-transparent: #4ab3d630;
-            font-size: 1.1rem;
-            font-family: ff-uberhand-pro-2,sans-serif;
-            font-weight: 200;
+            --text-color-main: #2d2d2d;
+            --text-color-header: #0a0a0a;
+            --text-color-white: #ffffff;
+            
+            font-size: 1.0rem;
+            font-family: adobe-handwriting-tiffany, sans-serif;
+            font-weight: 400;
             font-style: normal;
-            line-height: 1.65;
-            letter-spacing: 0.005em;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
             background-color: var(--primary-color);
             scrollbar-color:  var(----primary-color-transparent) #d0e2e7;
             overflow-x: hidden;
+            color: var(--text-color-main);
+
         }
 
         h1, h2, h3, h4, h5, h6 {
+            color: var(--text-color-header);
             font-family: lint-mccree,sans-serif;
             font-weight: 400;
             font-style: normal;
@@ -149,26 +184,5 @@
                 background: url("/torn-paper-bottom.png");
             }
         }
-    }
-
-    .under-construction {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        width: 50vw;
-        z-index: 50;
-        pointer-events: none;
-
-        animation-name: move-up;
-        animation-duration: 3s;
-        animation-timing-function: ease-in;
-        animation-fill-mode: forwards;
-    }
-
-    @keyframes move-up {
-        from {transform: translate(0, 0);}
-        to {transform: translate(0, -100%);}
     }
 </style>

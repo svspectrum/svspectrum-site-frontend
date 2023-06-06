@@ -1,18 +1,18 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { fade } from 'svelte/transition';
-    import { cubicOut, quadOut } from 'svelte/easing';
+    import { quadOut } from 'svelte/easing';
 
     export let amount = 6;
     const min = 1;
     const max = 31;
     let doodles = [];
 
-    function randomInteger(min, max) {
+    function randomInteger(min: number, max: number) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
     }
 
-    function shuffle(array) {
+    function shuffle(array: any[]) {
         let currentIndex = array.length, randomIndex;
 
         // While there remain elements to shuffle...
@@ -30,7 +30,7 @@
     }
 
     onMount(() => {
-        function isOrderBad(doodles) {
+        function isOrderBad(doodles: any[]) {
             let prev = NaN;
             let badness = 0;
             for (const doodle of doodles) {

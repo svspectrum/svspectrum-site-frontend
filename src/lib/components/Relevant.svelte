@@ -10,7 +10,7 @@
     import { getBackendURL } from "$lib/api/backend";
     import { onMount } from "svelte";
 
-    type SlideData = {title: string, subtitle: string, reason: string, image: IImageData, slug: string};    
+    type SlideData = {title: string, subtitle: string, reason: string, image: IImageData, url: string};    
     
     dayjs.locale("nl");
     dayjs.extend(relativeTime);
@@ -57,7 +57,7 @@
         subtitle: relevantItem.title,
         reason: getReasonText(relevantItem),
         image: relevantItem.event.image,
-        slug: relevantItem.event.slug,
+        url: relevantItem.event.url,
     }));
 
     let currentIndex = 0;
@@ -133,7 +133,7 @@
     <div class="image-carousel">
         {#each movedSlides as {index, position, slide} (index)}
             {#if position == 0}
-            <a href={`/${slide.slug}`} class="image" in:moveIn|local={{easing: cubicOut, direction}} out:moveBack|local>
+            <a href={`/${slide.url}`} class="image" in:moveIn|local={{easing: cubicOut, direction}} out:moveBack|local>
                 <Image image={slide.image} />
             </a>
             {/if}
@@ -146,7 +146,7 @@
                 style={`transform: translate(${position*100}%, 0)`}
                 on:click={() => setSlide(index)}>
                 <div class="title">{slide.title}</div>
-                {#if slide.title.toLowerCase().search(slide.subtitle.toLowerCase()) == -1}
+                {#if slide.subtitle && slide.title.toLowerCase().search(slide.subtitle.toLowerCase()) == -1}
                 <div class="subtitle">{slide.subtitle}</div>
                 {/if}
                 <div class="reason">{slide.reason}</div>
@@ -156,7 +156,10 @@
 </HeaderImageHolder>
 {:else}
 <HeaderImageHolder> 
-    <img src={getBackendURL("uploads/placeholder_d972f74598.jpg")} alt="Er zijn op het moment geen relevante evenementen :(">
+    <img src="/placeholder2.jpg" alt="Er zijn op het moment geen relevante evenementen :(">
+    <div slot="top" class="title-carousel">
+        <div class="placeholder-title">Er zijn op het moment geen relevante evenementen :(</div>
+    </div>
 </HeaderImageHolder>
 {/if}
 
@@ -192,7 +195,7 @@
         bottom: .5em;
         margin: auto;
 
-        width: 25ch;
+        width: min(18rem, 100vw);
         padding: 10px;
 
         line-height: 1.1;
@@ -215,5 +218,17 @@
     .current {
         font-size: 1.3em;
         font-weight: bold;
+    }
+
+    .placeholder-title {
+        position: absolute;
+        left: .5rem;
+        right: .5rem;
+        bottom: .5rem;
+        margin: auto;
+
+        text-align: center;
+
+        font-size: 2em;
     }
 </style>

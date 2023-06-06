@@ -1,3 +1,7 @@
+import dayjs from "dayjs";
+import type { Dayjs } from "dayjs";
+import { createResponseParser } from "./response";
+
 export interface IImageData { 
     id: number;
     name: string;
@@ -26,6 +30,20 @@ export interface IImageData {
     previewUrl: any;
     provider: string;
     provider_metadata: any;
-    created_at: string;
-    updated_at: string;
+    createdAt: Dayjs;
+    updatedAt: Dayjs;
+    placeholder: string;
 }
+
+export const parseImage = createResponseParser((image: any) => {
+    if (typeof image === 'object' && image !== null) {
+        let parsed : IImageData = {...image};
+
+        parsed.createdAt = dayjs(parsed.createdAt);
+        parsed.updatedAt = dayjs(parsed.updatedAt);
+
+        return parsed;
+    } else {
+        return null;
+    }
+});

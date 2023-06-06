@@ -1,10 +1,17 @@
 <script lang="ts">
-import { onMount } from "svelte";
-
+    import { session } from "$app/stores";
+    import { removeCookie } from "$lib/client/cookies";
+    import { goto } from "$app/navigation";
 
     let menuIsOpen = false;
     let subMenuIsOpen = false;
     let subMenuButton : HTMLAnchorElement;
+
+    function logout() {
+        removeCookie('jwt');
+        session.update(session => ({...session, jwt: ""}));
+        goto('/');
+    }
 
     function closeMenus() {
         menuIsOpen = false;
@@ -66,7 +73,9 @@ import { onMount } from "svelte";
             </a></li>
             <li class="item"><a href="/">Nieuws</a></li>
             <li class="item"><a href="/Agenda">Agenda</a></li>
+            <li class="item"><a href="/Bash">BASH</a></li>
             <li class="item"><a href="/Informatie">Informatie</a></li>
+            <li class="item"><a href="/Vacatures">Vacatures</a></li>
             <li class="item has-submenu" class:submenu-active={subMenuIsOpen}>
                 <!-- svelte-ignore a11y-missing-attribute -->
                 <a tabindex="0" on:click={toggleSubMenu} bind:this={subMenuButton}>Bibliotheek</a>
@@ -75,10 +84,15 @@ import { onMount } from "svelte";
                     <li class="subitem"><a href="/Boekenverkoop">(Boeken) Winkel</a></li>
                     <li class="subitem"><a href="/Fotos">Foto's</a></li>
                     <li class="subitem"><a href="/Archief">Archief</a></li>
-                    <li class="subitem"><a href="/Vacatures">Vacatures</a></li>
                 </ul>
             </li>
-            <li class="item button"><a href="/Log-In">Log In</a></li>
+            <li class="item button">
+                {#if $session.jwt}
+                    <a href="" on:click={logout}>Log Uit</a>
+                {:else}
+                    <a href="/Log-In">Log In</a>
+                {/if}
+            </li>
             <li class="item button secondary"><a href="/Word-Lid">Word Lid</a></li>
             <!-- svelte-ignore a11y-invalid-attribute -->
             <li class="toggle"><a href="" on:click={toggleMenu}><i class="fas fa-bars" class:fa-bars={!menuIsOpen} class:fa-times={menuIsOpen}></i></a></li>
@@ -119,6 +133,7 @@ import { onMount } from "svelte";
         z-index: 10;
         background-color: var(--primary-color-transparent);
         backdrop-filter: contrast(100%) blur(10px);
+        box-shadow: 0 0px 5px 2px rgba(0, 0, 0, .3), 0 0 20px 0px rgba(0, 0, 0, .15) inset;
     }
 
     nav {

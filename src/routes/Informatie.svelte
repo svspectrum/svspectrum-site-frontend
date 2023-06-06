@@ -5,8 +5,8 @@
     /**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
-    export async function load({ page, fetch, session, context }) {
-		let {res, info} = await getInfo();
+    export async function load({ session }) {   
+		let {res, info} = await getInfo(session.jwt);
 
 		if (res.ok) {
 			if (info) {
@@ -38,16 +38,16 @@
 
 <main>
     <Doodles/>
-    {#each info.catagory as catagory}
-        <div class="category" id={`c-${catagory.title}`}>
-            <h1>{catagory.title}</h1>
+    {#each info.categories as category}
+        <div class="category" id={`c-${category.title}`}>
+            <h1>{category.title}</h1>
             <div class="subcategories">
-                {#each catagory.subcatagory as subcatagory}
+                {#each category.subcategories as subcategory}
                     <div class="subcategory">
-                        <h2>{subcatagory.title}</h2>
+                        <h2>{subcategory.title}</h2>
                         <ul>
-                        {#each subcatagory.pages as page}
-                            <li><a href={`/${page.slug}`}>{page.title}</a></li>
+                        {#each subcategory.pages as page}
+                            <li><a href={page.url}>{page.title}</a></li>
                         {/each}
                         </ul>
                     </div>

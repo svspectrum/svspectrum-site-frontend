@@ -1,16 +1,17 @@
 import dayjs from 'dayjs';
 import type { Dayjs } from "dayjs";
-import { IPageData, parsePage } from './page';
+import { type IPageData, parsePage } from './page';
 import { fetchBackend } from './backend';
+import { createResponseParser } from './response';
 
 export interface IInfoData {
     id: number;
-    created_at: Dayjs;
-    updated_at: Dayjs;
-    catagory: {
+    createdAt: Dayjs;
+    updatedAt: Dayjs;
+    categories: {
         id: number;
         title: string;
-        subcatagory: {
+        subcategories: {
             id: number;
             title: string;
             pages: IPageData[];
@@ -18,32 +19,35 @@ export interface IInfoData {
     }[];
 }
 
-export async function getInfo() {
-    const path = 'info';
-    const res = await fetchBackend(path);
+export async function getInfo(jwt: string) {
+    const path = 'info?populate[categories][populate][subcategories][populate]=*';
+    const res = await fetchBackend(path, jwt);
     let info : IInfoData;
     
     if (res.ok) {
-        info = await res.json();
+        const json = await res.json();
+        info = parseInfo(json.data);
     }
 
     return {res, info};
 }
 
-export function parseInfo(info: IInfoData) {
-    if (info) {
-        let parsed : IInfoData = {...info};
-        parsed.created_at = dayjs(parsed.created_at);
-        parsed.updated_at = dayjs(parsed.updated_at);
+export const parseInfo = createResponseParser((info: any) => {
+    if (typeof info === 'object' && info !== null) {
+        let parsed : IInfoData = info;
+
+        parsed.createdAt = dayjs(parsed.createdAt);
+        parsed.updatedAt = dayjs(parsed.updatedAt);
         
-        for (const catagory of parsed.catagory) {
-            for (const subcatagory of catagory.subcatagory) {
-                subcatagory.pages.map(parsePage);
+        for (const category of parsed.categories) {
+            for (const subcategory of category.subcategories) {
+                subcategory.pages = parsePage(subcategory.pages);
+                subcategory.pages.sort((a, b) => a.title.localeCompare(b.title));
             }
         }
 
         return parsed;
     } else {
-        return info;
+        return null;
     }
-}
+});
