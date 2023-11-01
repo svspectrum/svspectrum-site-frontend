@@ -6,3 +6,5 @@ declare global {
 }
 
 window.ICAL = window.ICAL || {};
+
+//Heel spannend dit 
