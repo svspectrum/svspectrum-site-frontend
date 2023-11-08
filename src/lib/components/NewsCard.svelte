@@ -1,16 +1,22 @@
+<!-- Het weergeven van nieuwsartikelen op de webpagina-->
+
 <script lang="ts">
+    // Importeer benodigde modules
     import type { INewsData } from "$lib/api/news";
     import { getPageVisitState } from "$lib/client/visited";
     import { onMount } from "svelte";
     import Article from "./Article.svelte";
     import Image from "./Image.svelte";
 
+    // Declareer variabelen en initialisatie
     export let item: INewsData;
     let angle;
     let updates = [];
 
+    // Bepaal de bezoekstatus van de pagina
     $: visitState = getPageVisitState(item);
 
+    // Als het nieuwsartikel een 'event' is, bereid de updates voor
     $: if (item.type == 'event') {
         updates = item.updates.map(update => ({
             update,
@@ -18,18 +24,19 @@
         }));
     }
 
+    // Voer functie uit bij het monteren van het component
     onMount(() => {
-        angle = Math.random()*2-1;
+        angle = Math.random() * 2 - 1;
     });
-</script> 
+</script>
 
 <article class="news-card">
     <a href={item.url} style={`transform: rotate(${angle}deg)`}>
         <div class="top">
             {#if item.type == "event"}
-                <Image image={item.image}/>
+                <Image image={item.image}/> <!-- Toon afbeelding voor evenementen -->
             {:else if item.type == "post"}
-                <Article>{@html item.content}</Article>
+                <Article>{@html item.content}</Article> <!-- Toon artikelinhoud voor berichten -->
             {/if}
         </div>
         <div class="bottom">
@@ -52,24 +59,26 @@
         {#if !visitState.visited && visitState.recentlyPublished}
             <div class="new cardnote">nieuw</div>
         {:else if !visitState.visitedSinceUpdate && visitState.visited}
-            <div class="updated cardnote">geüpdatet</div>
+            <div class "updated cardnote">geüpdatet</div>
         {/if}
     </a>
-    
     <div class="publish-date">
         <span>{item.begin.format("DD MMM YY")}</span>
     </div>
 </article>
 
 <style lang="scss">
+    /* Stijl voor nieuwe notities */
     .new {
         --sticker-color: rgb(205, 0, 0);
     }
 
+    /* Stijl voor bijgewerkte notities */
     .updated {
         --sticker-color: rgb(230, 130, 0);
     }
 
+    /* Stijl voor subnotities en notities op kaart */
     .subnote, .cardnote {
         color: white;
         background: var(--sticker-color);
@@ -79,6 +88,7 @@
         line-height: 1.8;
     }
 
+    /* Stijl voor notities op kaart */
     .cardnote {
         position: absolute;
         top: 0.5em;
@@ -88,6 +98,7 @@
         border-radius: 1em;
     }
 
+    /* Stijl voor subnotities */
     .subnote {
         display: inline-block;
         padding: 0 .4em;
@@ -97,7 +108,8 @@
         line-height: 1.4;
     }
 
-    .news-card>a {
+    /* Stijl voor nieuwskaarten */
+    .news-card > a {
         display: block;
         color: inherit;
         text-decoration: inherit;
@@ -123,21 +135,22 @@
         &::before {
             top: 3px;
             left: 0;
-
-            transform:translate(-50%, -50%) rotate(-50deg);
+            transform: translate(-50%, -50%) rotate(-50deg);
         }
 
         &::after {
             bottom: 0;
             right: 0;
-            transform:translate(50%, 50%) rotate(-40deg);
+            transform: translate(50%, 50%) rotate(-40deg);
         }
     }
 
+    /* Algemene stijl voor artikelcontainers */
     article {
         position: relative;
     }
 
+    /* Stijl voor het bovenste gedeelte van de kaart */
     .top {
         position: relative;
         aspect-ratio: 4/1;
@@ -158,22 +171,4 @@
                 color: var(--primary-color-transparent);
                 line-height: .6;
                 padding: 0;
-                mix-blend-mode: multiply;
-
-                &::before {
-                    content: none;
-                }
-
-                &::after {
-                    content: "";
-                    position: absolute;
-                    inset: -1px;
-                    box-sizing: border-box;
-
-                    border: 20px solid transparent;
-                    border-image: url("/fade-border.png") 20 round;
-                }
-            }
-        }
-    }
-</style>
+                mix-blend
