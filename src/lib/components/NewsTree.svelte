@@ -1,16 +1,23 @@
+<!-- Weergeven van nieuwsartikelen, kan ze sorteren en filteren op basis 
+    van hun publicatie- en archiefstatus, en past verschillende lay-outstijlen 
+    toe op basis van het schermformaat.-->
+
 <script lang="ts">
+    // Importeer de benodigde modules en componenten
     import type { INewsData } from "$lib/api/news";
     import NewsCard from "./NewsCard.svelte";
     import Ad from "./Ad.svelte";
     import dayjs from "dayjs";
 
+    // Declareer de inkomende gegevens en optie voor archiefweergave
     export let news: INewsData[];
     export let archive: boolean;
 
+    // Declareer variabelen voor het gesorteerde nieuws
     let sortedNews;
     $: sortedNews = news
         .filter(item => item.end.isBefore(dayjs()) == archive)
-        .sort((a, b) => (archive ? -1 : 1) * a.begin.diff(b.begin))
+        .sort((a, b) => (archive ? -1 : 1) * a.begin.diff(b.begin));
 
 </script>
 
@@ -33,6 +40,7 @@
 {/if}
 
 <style lang="scss">
+    /* Stijlen voor de nieuwsweergave */
     .news-tree + .news-tree  {
         .timeline {
             margin-top: 2px;
@@ -43,11 +51,13 @@
     }
 
     .news-tree {
+        /* Definieer aangepaste CSS-variabelen */
         --news-tree-padding: min(1rem, 3vw);
         --timeline-line-width: 4px;
         --publish-time-width: calc(7ch + 1rem);
         --timeline-width: calc(var(--timeline-line-width) + var(--publish-time-width)*2);
     
+        /* Lay-out voor de nieuwsweergave */
         position: relative;
         display: grid;
         width: 100%;
