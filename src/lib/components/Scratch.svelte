@@ -1,4 +1,4 @@
-<!-- Het maken van een kraslotachtige animatie? -->
+<!-- Het maken van een kraslotachtige animatie (sponsoranimatie) -->
 
 <script lang="ts">
     import { draw } from 'svelte/transition';
