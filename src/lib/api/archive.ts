@@ -44,6 +44,8 @@ export async function getArchive(jwt: string) {
     return {res, archive};
 }
 
+// De functie neemt een archive-object, checkt de structuur en transformeert 
+// het naar een andere ddata-soort
 export const parseArchive = createResponseParser((archive: any) => { 
     if (typeof archive === 'object' && archive !== null) {
         let parsed = {...archive};

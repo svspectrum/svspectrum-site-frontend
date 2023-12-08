@@ -3,6 +3,7 @@ import type { Dayjs } from "dayjs";
 import { createResponseParser } from "./response";
 
 export interface IImageData { 
+    // Hetzelfde als event.ts
     id: number;
     name: string;
     alternativeText: string;

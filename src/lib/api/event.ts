@@ -6,9 +6,10 @@ import { type IPostData, parsePost } from "./post";
 import { createResponseParser } from "./response";
 
 export interface IEventData {
+    // Beschrijft hoe EventData eruit ziet
     type: "event";
     id: number;
-    title:string;
+    title: string;
     description:string;
     packing_list: string;
     price: string;
@@ -39,10 +40,12 @@ export interface IEventData {
 }
 
 export async function getEvent(url : string, jwt: string) {
+    // Sorteer op bepaalde events op basis van url
     const path = `events?filters[url][$eq]=${url}&populate=*`;
     const res = await fetchBackend(path, jwt);
     let event : IEventData;
 
+    // Haal event uit de database
     if (res.ok) {
         const json = await res.json();
         event = parseEvent(json.data)[0];
