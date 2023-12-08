@@ -5,6 +5,7 @@ import { fetchBackend, getBackendURL } from "./backend";
 import { createResponseParser, flattenResponse } from "./response";
 
 export interface IArchiveTitleData {
+    // Kan een titel of een subtitel zijn
     type: "title" | "subtitle";
     id: number;
     title: string;
@@ -20,6 +21,7 @@ export interface IArchiveFileData {
 }
 
 export interface IArchiveData {
+    // Dit is de samenvoeging van de titel en de inhoud
     id: number;
     content: (IArchiveTitleData | IArchiveFileData)[];
     createdAt: Dayjs;
@@ -27,8 +29,11 @@ export interface IArchiveData {
 }
 
 export async function getArchive(jwt: string) {
+    // Haal foto's en inhoud van vorige activiteiten uit het archief 
     const path = `archive?populate[content][populate]=image,file`;
     const res = await fetchBackend(path, jwt);
+
+    // Sla de informatie erover op in de vorm van IArchiveData
     let archive : IArchiveData;
 
     if (res.ok) {

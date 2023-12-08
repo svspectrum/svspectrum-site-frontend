@@ -55,7 +55,7 @@
 
         <button type="submit">Log in</button>
         <label>
-            <input type="checkbox" bind:checked={remember} name="remember"> Houd mij ingelogt (gebruikt cookies)
+            <input type="checkbox" bind:checked={remember} name="remember"> Houd mij ingelogd (gebruikt cookies)
         </label>
     </form>
 </main>
