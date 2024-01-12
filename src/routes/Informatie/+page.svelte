@@ -1,31 +1,35 @@
 <script lang="ts" context="module">
-	// INFO PAGE
-	import { getInfo } from "$lib/api/info";
+	throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
+
+	// // INFO PAGE
+	// import { getInfo } from "$lib/api/info";
 
     /**
-	 * @type {import('@sveltejs/kit').Load}
-	 */
+	//  * @type {import('@sveltejs/kit').Load}
+	//  */
     export async function load({ session }) {   
-		let {res, info} = await getInfo(session.jwt);
+	// 	let {res, info} = await getInfo(session.jwt);
 
-		if (res.ok) {
-			if (info) {
-				return {
-					props: {
-						info
-					}
-				};
-			}
-		} else {
-			return {
-				status: res.status,
-				error: new Error(`database error`)
-			};
-		}
-	}
+	// 	if (res.ok) {
+	// 		if (info) {
+	// 			return {
+	// 				props: {
+	// 					info
+	// 				}
+	// 			};
+	// 		}
+	// 	} else {
+	// 		return {
+	// 			status: res.status,
+	// 			error: new Error(`database error`)
+	// 		};
+	// 	}
+	// }
 </script>
 
 <script lang="ts">
+    throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
     import type { IInfoData } from "$lib/api/info";
     import Doodles from "$lib/components/Doodles.svelte";
     

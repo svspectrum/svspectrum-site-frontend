@@ -1,32 +1,36 @@
 <script lang="ts" context="module">
-	// EVENT PAGE
-	import { getEvent } from "$lib/api/event";
+	throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-	/**
-	 * @type {import('@sveltejs/kit').Load}
-	 */
+	// // EVENT PAGE
+	// import { getEvent } from "$lib/api/event";
+
+	// /**
+	//  * @type {import('@sveltejs/kit').Load}
+	//  */
     export async function load({ params, session }) {
-		const url = `/event/${params.year}/${params.slug}`
-		let {res, event} = await getEvent(url, session.jwt);
+	// 	const url = `/event/${params.year}/${params.slug}`
+	// 	let {res, event} = await getEvent(url, session.jwt);
 
-		if (res.ok) {
-			if (event) {
-				return {
-					props: {
-						event: event
-					}
-				};
-			}
-		} else {
-			return {
-				status: res.status,
-				error: new Error(`database error`)
-			};
-		}
-	}
+	// 	if (res.ok) {
+	// 		if (event) {
+	// 			return {
+	// 				props: {
+	// 					event: event
+	// 				}
+	// 			};
+	// 		}
+	// 	} else {
+	// 		return {
+	// 			status: res.status,
+	// 			error: new Error(`database error`)
+	// 		};
+	// 	}
+	// }
 </script>
 
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import type { IEventData } from "$lib/api/event"
 
     import Article from "$lib/components/Article.svelte";

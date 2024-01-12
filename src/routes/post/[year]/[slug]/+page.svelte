@@ -1,32 +1,36 @@
 <script lang="ts" context="module">
-	// POST PAGE
+	throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
+
+	// // POST PAGE
     import { getPost } from "$lib/api/post";
 
-	/**
-	 * @type {import('@sveltejs/kit').Load}
-	 */
+	// /**
+	//  * @type {import('@sveltejs/kit').Load}
+	//  */
     export async function load({ params, session }) {
-		const slug = `/post/${params.year}/${params.slug}`
-		let {res, post} = await getPost(slug, session.jwt);
+	// 	const slug = `/post/${params.year}/${params.slug}`
+	// 	let {res, post} = await getPost(slug, session.jwt);
 
-		if (res.ok) {
-			if (post) {
-				return {
-					props: {
-						post
-					}
-				};
-			}
-		} else {
-			return {
-				status: res.status,
-				error: new Error(`database error`)
-			};
-		}
-	}
+	// 	if (res.ok) {
+	// 		if (post) {
+	// 			return {
+	// 				props: {
+	// 					post
+	// 				}
+	// 			};
+	// 		}
+	// 	} else {
+	// 		return {
+	// 			status: res.status,
+	// 			error: new Error(`database error`)
+	// 		};
+	// 	}
+	// }
 </script>
 
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
     import Article from "$lib/components/Article.svelte";
     import type { IPostData } from "$lib/api/post";
 	import Doodles from "$lib/components/Doodles.svelte";

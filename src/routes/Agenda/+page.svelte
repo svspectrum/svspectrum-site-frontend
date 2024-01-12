@@ -1,6 +1,4 @@
-<script context="module">
-	// export const ssr = false;
-</script>
+
 
 <script lang="ts">
     import Doodles from '$lib/components/Doodles.svelte';

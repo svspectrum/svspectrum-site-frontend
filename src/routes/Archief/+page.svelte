@@ -1,31 +1,35 @@
 <script lang="ts" context="module">
-	// ARCHIVE PAGE
+	throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
+
+	// // ARCHIVE PAGE
     import { getArchive } from "$lib/api/archive";
 
-	/**
-	 * @type {import('@sveltejs/kit').Load}
-	 */
+	// /**
+	//  * @type {import('@sveltejs/kit').Load}
+	//  */
     export async function load({ params, session }) {
-		let {res, archive} = await getArchive(session.jwt);
+	// 	let {res, archive} = await getArchive(session.jwt);
 
-		if (res.ok) {
-			if (archive) {
-				return {
-					props: {
-						archive
-					}
-				};
-			}
-		} else {
-			return {
-				status: res.status,
-				error: new Error(`database error`)
-			};
-		}
-	}
+	// 	if (res.ok) {
+	// 		if (archive) {
+	// 			return {
+	// 				props: {
+	// 					archive
+	// 				}
+	// 			};
+	// 		}
+	// 	} else {
+	// 		return {
+	// 			status: res.status,
+	// 			error: new Error(`database error`)
+	// 		};
+	// 	}
+	// }
 </script>
 
 <script lang="ts">
+    throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import Doodles from "$lib/components/Doodles.svelte";
     import type { IArchiveData } from "$lib/api/archive";
     import Image from "$lib/components/Image.svelte";
